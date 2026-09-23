@@ -49,3 +49,7 @@ This game was **entirely developed by the DeepSeek V4 Flash AI** — GDD, C# log
 
 - `Assets/` 中的经典魔塔素材源自原版游戏，仅供学习与致敬，**请勿商用**。Classic Mota assets are for learning/homage only — do not use commercially.
 - 读取旧存档沿用存档内数值；新游戏 / 重置后才应用初始生命 100。Loading an old save keeps its values; new games apply HP 100.
+
+## 🙏 参考与致谢 · References & Acknowledgments
+
+参考了开源 pygame 魔塔项目 **MagicTowerGame**（[GaoDeBuChou/MagicTowerGame](https://github.com/GaoDeBuChou/MagicTowerGame)）的玩法设计与美术素材，特此致谢。References the open-source pygame project **MagicTowerGame** ([GaoDeBuChou/MagicTowerGame](https://github.com/GaoDeBuChou/MagicTowerGame)) for gameplay design and art assets — many thanks.

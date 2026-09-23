@@ -1,5 +1,5 @@
 # import_classic_assets.ps1
-# 从经典 pygame 魔塔参考实现（MagicTowerGame-master）导入美术资源到 Assets/Tiles：
+# 从经典 pygame 魔塔参考实现（MagicTowerGame，https://github.com/GaoDeBuChou/MagicTowerGame ）导入美术资源到 Assets/Tiles：
 #   · 玩家四方向火柴人       player_up / player_down / player_left / player_right.png
 #   · 6 种经典怪物           monster_classic_1..6.png
 #   · 三色门 / 三色钥匙      door_yellow/red/blue.png、key_yellow/red/blue.png
