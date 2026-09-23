@@ -1,0 +1,59 @@
+{
+  "ShopId": 1,
+  "Items": [
+    {
+      "Id": 1,
+      "Name": "\u751F\u547D \u002B300",
+      "Desc": "\u7ACB\u5373\u6062\u590D 300 \u70B9\u751F\u547D\uFF08\u53D7\u4E0A\u9650\u7EA6\u675F\uFF09",
+      "Type": "Hp",
+      "KeyType": "Yellow",
+      "Value": 300,
+      "Price": 200
+    },
+    {
+      "Id": 2,
+      "Name": "\u653B\u51FB \u002B10",
+      "Desc": "\u6C38\u4E45\u589E\u52A0 10 \u70B9\u653B\u51FB",
+      "Type": "Attack",
+      "KeyType": "Yellow",
+      "Value": 10,
+      "Price": 400
+    },
+    {
+      "Id": 3,
+      "Name": "\u9632\u5FA1 \u002B10",
+      "Desc": "\u6C38\u4E45\u589E\u52A0 10 \u70B9\u9632\u5FA1",
+      "Type": "Defense",
+      "KeyType": "Yellow",
+      "Value": 10,
+      "Price": 400
+    },
+    {
+      "Id": 4,
+      "Name": "\u9EC4\u94A5\u5319 \u002B1",
+      "Desc": "\u83B7\u5F97 1 \u628A\u9EC4\u94A5\u5319",
+      "Type": "Key",
+      "KeyType": "Yellow",
+      "Value": 1,
+      "Price": 50
+    },
+    {
+      "Id": 5,
+      "Name": "\u84DD\u94A5\u5319 \u002B1",
+      "Desc": "\u83B7\u5F97 1 \u628A\u84DD\u94A5\u5319",
+      "Type": "Key",
+      "KeyType": "Blue",
+      "Value": 1,
+      "Price": 100
+    },
+    {
+      "Id": 6,
+      "Name": "\u7EA2\u94A5\u5319 \u002B1",
+      "Desc": "\u83B7\u5F97 1 \u628A\u7EA2\u94A5\u5319",
+      "Type": "Key",
+      "KeyType": "Red",
+      "Value": 1,
+      "Price": 200
+    }
+  ]
+}

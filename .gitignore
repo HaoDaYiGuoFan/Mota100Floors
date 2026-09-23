@@ -1,0 +1,44 @@
+# ============ 魔塔 100 层 · .gitignore（中英 / EN-ZH） ============
+# 构建产物、发布输出、压缩包与本地配置不入库；Assets 素材与 Data 内容数据保留。
+# Build outputs, publish artifacts, archives and local configs are ignored;
+# Assets and Data content are kept in the repo.
+
+# --- 构建输出（任意层级） Build outputs (any depth) ---
+[Bb]in/
+[Oo]bj/
+artifacts/
+TestResults/
+
+# --- 发布输出 Publish output ---
+publish/
+
+# --- 压缩包 / 二进制产物 Archives & binaries ---
+*.zip
+*.rar
+*.7z
+*.nupkg
+*.snupkg
+*.exe
+*.dll
+*.pdb
+
+# --- Visual Studio / Rider / VSCode（IDE 设置） ---
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+vssver.scc
+
+# --- 临时 / 日志 / 系统文件 Temp, logs & OS files ---
+.smoke/
+crash.log
+*.log
+*.tmp
+*.temp
+*~
+Thumbs.db
+Desktop.ini
+.DS_Store

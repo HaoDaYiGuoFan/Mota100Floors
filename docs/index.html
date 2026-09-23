@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>魔塔 100 层 · 游戏设计文档（GDD）</title>
+<link rel="stylesheet" href="assets/css/mota.css" />
+<script defer src="assets/js/mota.js"></script>
+</head>
+<body data-page="index">
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">魔塔 100 层
+      <small>Mota 100 Floors · GDD</small>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html" data-page="index">总览</a>
+      <a href="story.html" data-page="story">剧情设定</a>
+      <a href="interaction.html" data-page="interaction">交互规则</a>
+      <a href="combat.html" data-page="combat">战斗规则</a>
+      <a href="content.html" data-page="content">内容清单</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <div class="hero">
+    <h1>魔塔 100 层</h1>
+    <p class="sub">魔塔原版剧情交互与战斗规则 · 游戏设计文档（GDD）</p>
+    <div class="badges">
+      <span class="badge">.NET 10 WPF</span>
+      <span class="badge quest">剧情任务</span>
+      <span class="badge guard">守门门槛</span>
+      <span class="badge">明亮 UI</span>
+      <span class="badge">100 层</span>
+    </div>
+  </div>
+
+  <section class="card">
+    <h2>一、项目简介</h2>
+    <p>《魔塔 100 层》是一款致敬经典《魔塔》玩法的<b>单机回合制爬塔 RPG</b>，使用 .NET 10 + WPF 实现，
+      以「原版剧情 + 经典交互 + 数值化战斗」为设计核心。玩家控制勇者，在一座 100 层的魔塔中拾取道具、
+      击杀怪物、开启门锁、与 NPC 对话并接受任务，最终登顶击败魔王·加坦杰厄。</p>
+    <p>本 GDD 站点将「原版剧情」与「战斗/交互规则」固化为可读文档，并同步描述当前版本已实现的全部内容。
+      所有数值均可对应到游戏数据文件（<code>Data/*.json</code>）。</p>
+    <div class="grid-cards">
+      <a href="story.html"><h3>📜 剧情设定</h3><p>世界观、主线脉络、塔中人物与关键剧情意象。</p></a>
+      <a href="interaction.html"><h3>🎮 交互规则</h3><p>移动、钥匙门、商店、NPC 对话、守门门槛与任务系统。</p></a>
+      <a href="combat.html"><h3>⚔️ 战斗规则</h3><p>回合制伤害公式、战斗门槛与 41 种怪物全数据。</p></a>
+      <a href="content.html"><h3>🗺️ 内容清单</h3><p>100 层结构、道具表、任务表、事件分布与数据文件说明。</p></a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>二、快速上手</h2>
+    <table>
+      <thead><tr><th>操作</th><th>按键</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>移动</td><td><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 或 <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></td><td class="left">每步一格；碰到怪物自动进入战斗结算</td></tr>
+        <tr><td>开门</td><td class="left">走到门上</td><td class="left">自动消耗对应钥匙，钥匙不足则无法通过</td></tr>
+        <tr><td>拾取道具</td><td class="left">走到道具上</td><td class="left">自动拾取并应用效果（生命/攻/防/钥匙）</td></tr>
+        <tr><td>楼梯</td><td class="left">走到 U / D 上</td><td class="left">U 上楼，D 下楼（U=上楼 D=下楼）</td></tr>
+        <tr><td>对话 / 商店</td><td class="left">走到 NPC / 商店上</td><td class="left">触发对话；商店弹出购买面板</td></tr>
+        <tr><td>关商店</td><td><kbd>Esc</kbd></td><td class="left">离开商店窗口</td></tr>
+        <tr><td>存档</td><td><kbd>F5</kbd></td><td class="left">写入 %LOCALAPPDATA%\Mota100Floors\save.json</td></tr>
+        <tr><td>读档</td><td><kbd>F9</kbd></td><td class="left">从磁盘恢复进度（含怪物/道具/门/任务状态）</td></tr>
+        <tr><td>音乐</td><td><kbd>M</kbd></td><td class="left">静音 / 恢复音乐</td></tr>
+        <tr><td>怪物手册</td><td><kbd>B</kbd></td><td class="left">查看全部 41 种怪物属性与当前预估伤害（含「无视防御」标记）</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>三、版本亮点（v1.0 明亮版）</h2>
+    <ul>
+      <li><b>经典美术换皮</b>：原版《魔塔》风格素材全部接入 —— 四方向勇者、6 类经典怪物贴图、三色门 / 钥匙、楼梯 / 商店 / NPC / 宝石 / 血瓶，地图由占位色块全面替换。</li>
+      <li><b>音效与朝向动画</b>：拾取道具、战斗命中均带音效；勇者按移动方向实时切换四方向贴图。</li>
+      <li><b>法师怪无视防御</b>：6 种魔法系怪物（闪电法师 / 水晶灵体 / 邪眼魔 / 混沌魔裔 / 暗影主宰 / 魔神）攻击不扣玩家防御，战斗预估与怪物手册同步修正。</li>
+      <li><b>明亮开局 UI</b>：暖阳渐变窗口底色、奶油金 HUD、金色圆角按钮（悬浮/按压反馈）、高对比文字。</li>
+      <li><b>魔塔式战斗</b>：无伤判定 / 预损提示（回合数 + 每回合伤害），打不过时自动放弃并给出建议。</li>
+      <li><b>进度门槛</b>：全塔 6 处守门 NPC，以攻击力 / 防御力作为通行条件（详见「交互规则」）。</li>
+      <li><b>剧情任务</b>：5 个可接取任务（抵达层数 / 击杀 / 拾取三种目标），带进度与奖励，随档保存。</li>
+      <li><b>原版剧情感</b>：新增/强化 20+ 处层内 NPC 剧情对话，串联「勇者登塔 · 魔王封印」主线。</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  魔塔 100 层 · 游戏设计文档（GDD） · 数据与规则以 <code>Data/*.json</code> 与引擎实现为准
+</footer>
+
+</body>
+</html>

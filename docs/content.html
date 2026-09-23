@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>内容清单 · 魔塔 100 层 GDD</title>
+<link rel="stylesheet" href="assets/css/mota.css" />
+<script defer src="assets/js/mota.js"></script>
+</head>
+<body data-page="content">
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">魔塔 100 层
+      <small>Mota 100 Floors · GDD</small>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html" data-page="index">总览</a>
+      <a href="story.html" data-page="story">剧情设定</a>
+      <a href="interaction.html" data-page="interaction">交互规则</a>
+      <a href="combat.html" data-page="combat">战斗规则</a>
+      <a href="content.html" data-page="content">内容清单</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <div class="hero">
+    <h1>内容清单</h1>
+    <p class="sub">100 层结构 · 事件分布 · 道具 · 任务 · 数据文件</p>
+  </div>
+
+  <section class="card">
+    <h2>一、楼层结构</h2>
+    <ul>
+      <li><b>总层数</b>：100 层（第 1 层无下路，第 100 层无上路），每层为 <b>18 × 11</b> 网格（1080 × 528 逻辑尺寸）；</li>
+      <li>上/下楼梯：每层以 <kbd>U</kbd> / <kbd>D</kbd> 表示上楼/下楼点；回廊互通，允许折返强化后重新挑战；</li>
+      <li><b>守门门槛 6 处</b>：5 / 10 / 20 / 50 / 80 / 90 层（详见「交互规则」）；</li>
+      <li><b>商店 15 座</b>：2 / 5 / 10 / 20 / 25 / 32 / 40 / 55 / 62 / 70 / 78 / 85 / 90 / 95 / 99 层；</li>
+      <li><b>任务 NPC 5 位</b>：1 / 5 / 10 / 20 / 50 层；<b>BOSS 1 处</b>：第 100 层魔王·加坦杰厄。</li>
+    </ul>
+    <div class="warn">已知边界问题：第 78 层存在一扇「事件位于门上」的旧布局（door 与事件坐标重叠），事件保留但开门仍正常；后续重构楼层时修复，不影响通关。</div>
+  </section>
+
+  <section class="card">
+    <h2>二、关键楼层事件分布</h2>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>楼层</th><th class="left">事件</th><th>楼层</th><th class="left">事件</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="left">老祭司 · 任务「初入魔塔」</td><td>50</td><td class="left">深渊之门守卫（防≥300）· 任务「深渊守望」</td></tr>
+        <tr><td>2</td><td class="left">旅行商人（商店）</td><td>55</td><td class="left">旅行商人（商店）</td></tr>
+        <tr><td>3</td><td class="left">守卫（剧情）</td><td>60</td><td class="left">守石老人（剧情）</td></tr>
+        <tr><td>4</td><td class="left">受伤的旅人（剧情）</td><td>62</td><td class="left">旅行商人（商店）</td></tr>
+        <tr><td>5</td><td class="left">商店 · 石像鬼守卫（攻≥45）· 任务「幽灵之患」</td><td>70</td><td class="left">旅行商人（商店）</td></tr>
+        <tr><td>10</td><td class="left">商店 · 魔法屏障守卫（防≥105）· 任务「生命之泉」</td><td>78</td><td class="left">旅行商人（商店）</td></tr>
+        <tr><td>20</td><td class="left">商店 · 烈焰石像（攻≥190）· 任务「铁甲之壁」</td><td>80</td><td class="left">钢铁守门人（防≥800）· 老铁匠（剧情）</td></tr>
+        <tr><td>25</td><td class="left">旅行商人（商店）</td><td>85</td><td class="left">旅行商人（商店）</td></tr>
+        <tr><td>30</td><td class="left">贤者（剧情）</td><td>90</td><td class="left">商店 · 末日之门守卫（攻≥1000）· 先知（剧情）</td></tr>
+        <tr><td>32</td><td class="left">旅行商人（商店）</td><td>95</td><td class="left">旅行商人（商店）</td></tr>
+        <tr><td>40</td><td class="left">商店 · 神秘人（剧情）</td><td>99</td><td class="left">旅行商人（商店）· 深渊情报官（剧情）</td></tr>
+        <tr><td>—</td><td class="left">—</td><td>100</td><td class="left">魔王·加坦杰厄（BOSS）· 魔王之影（剧情）</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>四、数据文件</h2>
+    <table>
+      <thead><tr><th class="left">文件</th><th class="left">内容</th><th>条目</th></tr></thead>
+      <tbody>
+        <tr><td class="left"><code>Data/Monsters.json</code></td><td class="left">怪物模板（生命/攻/防/金币/Tier/BOSS + SpriteIndex 贴图 + IgnoreDefense 法师特性）</td><td>41</td></tr>
+        <tr><td class="left"><code>Data/Items.json</code></td><td class="left">道具模板（回复/属性/钥匙）</td><td>12</td></tr>
+        <tr><td class="left"><code>Data/Quests.json</code></td><td class="left">任务模板（目标/计数/奖励）</td><td>5</td></tr>
+        <tr><td class="left"><code>Data/ShopConfig.json</code></td><td class="left">商店商品配置</td><td>6 类</td></tr>
+        <tr><td class="left"><code>Data/Floors/Floor1..100.json</code></td><td class="left">每层网格 + 事件（怪物/道具/门/NPC/守卫/商店/楼梯）</td><td>100</td></tr>
+      </tbody>
+    </table>
+    <p>所有楼层 JSON 均通过格式校验；运行时由 <code>GameData</code> 加载并缓存，<code>GameEngine</code> 依规则执行。</p>
+  </section>
+<section class="card">
+    <h2>三、道具表（12 种）</h2>
+    <p>与 <code>Data/Items.json</code> 一致：走上道具格自动拾取并生效。</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>名称</th><th class="left">效果</th><th>类型</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>生命药水·小</td><td class="left">恢复 100 点生命</td><td>回复</td></tr>
+        <tr><td>2</td><td>生命药水·大</td><td class="left">恢复 300 点生命</td><td>回复</td></tr>
+        <tr><td>3</td><td>圣光药剂</td><td class="left">恢复 1000 点生命</td><td>回复</td></tr>
+        <tr><td>4</td><td>力量宝石·小</td><td class="left">攻击 +5</td><td>属性</td></tr>
+        <tr><td>5</td><td>力量宝石·大</td><td class="left">攻击 +15</td><td>属性</td></tr>
+        <tr><td>6</td><td>战神之石</td><td class="left">攻击 +40</td><td>属性</td></tr>
+        <tr><td>7</td><td>守护宝石·小</td><td class="left">防御 +5</td><td>属性</td></tr>
+        <tr><td>8</td><td>守护宝石·大</td><td class="left">防御 +15</td><td>属性</td></tr>
+        <tr><td>9</td><td>泰坦之盾</td><td class="left">防御 +40</td><td>属性</td></tr>
+        <tr><td>10</td><td>黄钥匙</td><td class="left">可打开黄色门（+1）</td><td>钥匙</td></tr>
+        <tr><td>11</td><td>蓝钥匙</td><td class="left">可打开蓝色门（+1）</td><td>钥匙</td></tr>
+        <tr><td>12</td><td>红钥匙</td><td class="left">可打开红色门（+1）</td><td>钥匙</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note">任务速览与守门条件见 <a href="interaction.html">交互规则</a>；怪物数据见 <a href="combat.html">战斗规则</a>。</div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  魔塔 100 层 · 内容清单 · 数据与规则以 Data/*.json 与引擎实现为准
+</footer>
+
+</body>
+</html>

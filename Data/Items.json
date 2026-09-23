@@ -1,0 +1,106 @@
+[
+  {
+    "Id": 1,
+    "Name": "\u751F\u547D\u836F\u6C34\u00B7\u5C0F",
+    "Desc": "\u6062\u590D 100 \u70B9\u751F\u547D",
+    "Type": "Hp",
+    "KeyType": "Yellow",
+    "Value": 100
+  },
+  {
+    "Id": 2,
+    "Name": "\u751F\u547D\u836F\u6C34\u00B7\u5927",
+    "Desc": "\u6062\u590D 300 \u70B9\u751F\u547D",
+    "Type": "Hp",
+    "KeyType": "Yellow",
+    "Value": 300
+  },
+  {
+    "Id": 3,
+    "Name": "\u5723\u5149\u836F\u6C34",
+    "Desc": "\u6062\u590D 1000 \u70B9\u751F\u547D",
+    "Type": "Hp",
+    "KeyType": "Yellow",
+    "Value": 1000
+  },
+  {
+    "Id": 4,
+    "Name": "\u529B\u91CF\u5B9D\u77F3\u00B7\u5C0F",
+    "Desc": "\u653B\u51FB \u002B5",
+    "Type": "Attack",
+    "KeyType": "Yellow",
+    "Value": 5
+  },
+  {
+    "Id": 5,
+    "Name": "\u529B\u91CF\u5B9D\u77F3\u00B7\u5927",
+    "Desc": "\u653B\u51FB \u002B15",
+    "Type": "Attack",
+    "KeyType": "Yellow",
+    "Value": 15
+  },
+  {
+    "Id": 6,
+    "Name": "\u6218\u795E\u4E4B\u77F3",
+    "Desc": "\u653B\u51FB \u002B40",
+    "Type": "Attack",
+    "KeyType": "Yellow",
+    "Value": 40
+  },
+  {
+    "Id": 7,
+    "Name": "\u5B88\u62A4\u5B9D\u77F3\u00B7\u5C0F",
+    "Desc": "\u9632\u5FA1 \u002B5",
+    "Type": "Defense",
+    "KeyType": "Yellow",
+    "Value": 5
+  },
+  {
+    "Id": 8,
+    "Name": "\u5B88\u62A4\u5B9D\u77F3\u00B7\u5927",
+    "Desc": "\u9632\u5FA1 \u002B15",
+    "Type": "Defense",
+    "KeyType": "Yellow",
+    "Value": 15
+  },
+  {
+    "Id": 9,
+    "Name": "\u6CF0\u5766\u4E4B\u76FE",
+    "Desc": "\u9632\u5FA1 \u002B40",
+    "Type": "Defense",
+    "KeyType": "Yellow",
+    "Value": 40
+  },
+  {
+    "Id": 10,
+    "Name": "\u9EC4\u94A5\u5319",
+    "Desc": "\u53EF\u6253\u5F00\u9EC4\u8272\u95E8",
+    "Type": "Key",
+    "KeyType": "Yellow",
+    "Value": 1
+  },
+  {
+    "Id": 11,
+    "Name": "\u84DD\u94A5\u5319",
+    "Desc": "\u53EF\u6253\u5F00\u84DD\u8272\u95E8",
+    "Type": "Key",
+    "KeyType": "Blue",
+    "Value": 1
+  },
+  {
+    "Id": 12,
+    "Name": "\u7EA2\u94A5\u5319",
+    "Desc": "\u53EF\u6253\u5F00\u7EA2\u8272\u95E8",
+    "Type": "Key",
+    "KeyType": "Red",
+    "Value": 1
+  },
+  {
+    "Id": 13,
+    "Name": "\u98DE\u884C\u5668",
+    "Desc": "\u697C\u5C42\u7A7F\u68AD\u673A\uFF0C\u5728\u697C\u68AF\u65C1\u4F7F\u7528\uFF0C\u8DF3\u8F6C\u81F3\u5DF2\u63A2\u7D22\u697C\u5C42\uFF0C\u65E0\u4F7F\u7528\u6B21\u6570",
+    "Type": "FlyOrb",
+    "KeyType": "Yellow",
+    "Value": 0
+  }
+]

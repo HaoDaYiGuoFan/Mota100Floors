@@ -1,0 +1,72 @@
+[
+  {
+    "Id": 1,
+    "Name": "初入魔塔",
+    "Hint": "抵达第 3 层，熟悉魔塔的攀登法则。",
+    "DoneText": "欢迎来到魔塔！前进吧，勇者。",
+    "Type": "ReachFloor",
+    "TargetId": 3,
+    "Count": 1,
+    "RewardGold": 30,
+    "RewardAttack": 3,
+    "RewardDefense": 0,
+    "RewardMaxHp": 0,
+    "RewardText": "获得金币 30，攻击 +3"
+  },
+  {
+    "Id": 2,
+    "Name": "幽灵之患",
+    "Hint": "击杀 3 只幽灵，它们游荡在塔的下层。",
+    "DoneText": "幽灵已散，塔的走廊清静多了。",
+    "Type": "KillMonster",
+    "TargetId": 4,
+    "Count": 3,
+    "RewardGold": 50,
+    "RewardAttack": 5,
+    "RewardDefense": 0,
+    "RewardMaxHp": 0,
+    "RewardText": "获得金币 50，攻击 +5"
+  },
+  {
+    "Id": 3,
+    "Name": "生命之泉",
+    "Hint": "拾取 5 瓶生命药水·小，为远征储备生命。",
+    "DoneText": "药水已齐，愿生命护你远行。",
+    "Type": "PickupItem",
+    "TargetId": 1,
+    "Count": 5,
+    "RewardGold": 0,
+    "RewardAttack": 0,
+    "RewardDefense": 0,
+    "RewardMaxHp": 200,
+    "RewardText": "生命上限 +200"
+  },
+  {
+    "Id": 4,
+    "Name": "铁甲之壁",
+    "Hint": "击杀 2 名铁甲骑士，他们守卫着中层的要塞。",
+    "DoneText": "铁甲化作碎片，要塞的门为你敞开。",
+    "Type": "KillMonster",
+    "TargetId": 10,
+    "Count": 2,
+    "RewardGold": 120,
+    "RewardAttack": 0,
+    "RewardDefense": 10,
+    "RewardMaxHp": 0,
+    "RewardText": "获得金币 120，防御 +10"
+  },
+  {
+    "Id": 5,
+    "Name": "深渊守望",
+    "Hint": "抵达第 50 层，深渊之门的守卫正在等你。",
+    "DoneText": "你已站在深渊的门槛上，继续向前吧。",
+    "Type": "ReachFloor",
+    "TargetId": 50,
+    "Count": 1,
+    "RewardGold": 500,
+    "RewardAttack": 20,
+    "RewardDefense": 20,
+    "RewardMaxHp": 0,
+    "RewardText": "获得金币 500，攻击 +20，防御 +20"
+  }
+]

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>交互规则 · 魔塔 100 层 GDD</title>
+<link rel="stylesheet" href="assets/css/mota.css" />
+<script defer src="assets/js/mota.js"></script>
+</head>
+<body data-page="interaction">
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">魔塔 100 层
+      <small>Mota 100 Floors · GDD</small>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html" data-page="index">总览</a>
+      <a href="story.html" data-page="story">剧情设定</a>
+      <a href="interaction.html" data-page="interaction">交互规则</a>
+      <a href="combat.html" data-page="combat">战斗规则</a>
+      <a href="content.html" data-page="content">内容清单</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <div class="hero">
+    <h1>交互规则</h1>
+    <p class="sub">移动 · 钥匙门 · 道具 · 商店 · NPC · 守门门槛 · 任务系统 · 存档</p>
+  </div>
+
+  <section class="card">
+    <h2>一、移动与地形</h2>
+    <ul>
+      <li>地图为 18 × 11 的网格，每格 48 × 48 像素；方向键或 WASD 每按一次移动一格。</li>
+      <li>勇者移动时按方向实时切换<b>四方向朝向贴图</b>（↑ / ↓ / ← / → 各自独立素材），撞墙不转向。</li>
+      <li><b>墙「W」</b>不可通行；<b>地板「.」</b>可通行。</li>
+      <li><b>上楼「U」</b>进入上一层；<b>下楼「D」</b>进入下一层。第 1 层无下路、第 100 层无上路。</li>
+      <li>楼层之间存在「回廊互通」：打不过的怪物可以绕行，先变强再回来。</li>
+    </ul>
+    <div class="note">进入新楼的落点：从下层上楼落在该层 D 处；从上层下楼落在该层 U 处；开局/读档落点由出生点或存档坐标决定。</div>
+  </section>
+
+  <section class="card">
+    <h2>二、钥匙与门</h2>
+    <table>
+      <thead><tr><th>门</th><th>所需钥匙</th><th class="left">说明</th></tr></thead>
+      <tbody>
+        <tr><td>黄门「y」</td><td>黄钥匙</td><td class="left">最常见，每把开门消耗 1</td></tr>
+        <tr><td>蓝门「b」</td><td>蓝钥匙</td><td class="left">中后期通道，较稀缺</td></tr>
+        <tr><td>红门「r」</td><td>红钥匙</td><td class="left">高阶区域，全塔极少</td></tr>
+      </tbody>
+    </table>
+    <p>钥匙从道具（key_*）拾取或商店购买。开门<b>必须消耗</b> 1 把对应钥匙；
+      钥匙不足时系统提示「没有 XX钥匙，无法开门」并原地停留。</p>
+    <p class="warn">已经打开的门会永久变为地板；存档后读档仍保持打开状态（以 “x,y” 坐标增量记录）。</p>
+  </section>
+
+  <section class="card">
+    <h2>三、道具拾取</h2>
+    <table>
+      <thead><tr><th class="left">类型</th><th class="left">效果</th></tr></thead>
+      <tbody>
+        <tr><td class="left">生命药水（小 / 大 / 圣光）</td><td class="left">回复 100 / 300 / 1000 点生命（不超过上限）</td></tr>
+        <tr><td class="left">力量宝石（小 / 大 / 战神之石）</td><td class="left">攻击 +5 / +15 / +40</td></tr>
+        <tr><td class="left">守护宝石（小 / 大 / 泰坦之盾）</td><td class="left">防御 +5 / +15 / +40</td></tr>
+        <tr><td class="left">钥匙（黄 / 蓝 / 红）</td><td class="left">对应钥匙 +1</td></tr>
+      </tbody>
+    </table>
+    <p>走上道具格自动拾取并立即生效，同时刷新 HUD 与消息（伴随拾取音效）；拾取状态随档保存。</p>
+  </section>
+
+  <section class="card">
+    <h2>四、商店</h2>
+    <p>塔中共有 <b>15 座商店</b>（第 2 / 5 / 10 / 20 / 25 / 32 / 40 / 55 / 62 / 70 / 78 / 85 / 90 / 95 / 99 层），店主均为「旅行商人」，使用金币购买。</p>
+    <table>
+      <thead><tr><th class="left">商品</th><th class="left">效果</th><th>价格</th></tr></thead>
+      <tbody>
+        <tr><td class="left">生命 +300</td><td class="left">立即回复 300 生命（受上限约束）</td><td>200 金</td></tr>
+        <tr><td class="left">攻击 +10</td><td class="left">永久攻击 +10</td><td>400 金</td></tr>
+        <tr><td class="left">防御 +10</td><td class="left">永久防御 +10</td><td>400 金</td></tr>
+        <tr><td class="left">黄钥匙 +1 / 蓝钥匙 +1 / 红钥匙 +1</td><td class="left">对应钥匙 +1</td><td>50 / 100 / 200 金</td></tr>
+      </tbody>
+    </table>
+    <p>金币不足时无法购买；<kbd>Esc</kbd> 关闭商店，商店中不可存档。</p>
+  </section>
+<section class="card">
+    <h2>五、NPC 对话</h2>
+    <p>走上 NPC 格自动触发对话，对话内容写入右侧「事件记录」。NPC 分为三类：</p>
+    <ul>
+      <li><b>剧情 NPC</b>：提供世界观、提示与预言（如老祭司、贤者、先知）。</li>
+      <li><span class="badge quest">任务 NPC</span>：接受并交付任务（见「任务系统」）。</li>
+      <li><span class="badge guard">守门 NPC</span>：以属性门槛拦路，条件不足无法通过（见下）。</li>
+    </ul>
+    <div class="note">地图悬停 NPC 可见其名字、台词；守门 NPC 额外显示「守门条件」；任务 NPC 显示关联任务名。</div>
+  </section>
+
+  <section class="card">
+    <h2>六、守门 NPC（魔塔式进度门槛）</h2>
+    <p>守门 NPC 站在必经之路上，是经典魔塔的「属性门槛」机制。玩家尝试走上守门格时：</p>
+    <ul>
+      <li>条件<b>不满足</b> → NPC 拦下并提示所需条件，玩家<b>原地停留，不消耗任何资源</b>；</li>
+      <li>条件<b>满足</b> → NPC 放行（播放放行台词），玩家正常走到该格。</li>
+    </ul>
+    <div class="formula">支持的条件类型：攻击力 ≥ V / 防御力 ≥ V / 金币 ≥ V / 红·蓝·黄钥匙 ≥ V（只检测不消耗）/ 抵达层数 ≥ V</div>
+    <p>全塔布防 6 处守门 NPC，作为爬塔节奏的「阶段验收」：</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>楼层</th><th>守卫</th><th>通行条件</th><th class="left">关卡意义</th></tr></thead>
+      <tbody>
+        <tr><td>5</td><td>石像鬼守卫</td><td>攻击力 ≥ 45</td><td class="left">初入回廊的破防验收（幽灵/骷髅兵之后）</td></tr>
+        <tr><td>10</td><td>魔法屏障守卫</td><td>防御力 ≥ 105</td><td class="left">检验对铁甲骑士等高攻怪的承伤能力</td></tr>
+        <tr><td>20</td><td>烈焰石像</td><td>攻击力 ≥ 190</td><td class="left">中层要塞入口，需能破石魔像之防</td></tr>
+        <tr><td>50</td><td>深渊之门守卫</td><td>防御力 ≥ 300</td><td class="left">深渊回廊的准入线</td></tr>
+        <tr><td>80</td><td>钢铁守门人</td><td>防御力 ≥ 800</td><td class="left">神魔战场兵械库，抵御冰霜巨龙冲击</td></tr>
+        <tr><td>90</td><td>末日之门守卫</td><td>攻击力 ≥ 1000</td><td class="left">神魔战场大门，需能击破上古石像</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="warn">守门条件均可在当前阶段通过「拾取属性宝石 + 商店强化 + 折返下层」达成；商店可在关键节点提供攻/防补给，避免卡关。</p>
+  </section>
+
+  <section class="card">
+    <h2>七、任务系统</h2>
+    <p>与任务 NPC 对话即自动<b>接取</b>任务；达成目标后回到该 NPC 对话<b>交付</b>并领取奖励。任务状态：
+      0 未接取 → 1 进行中 → 2 已完成，<b>随存档保存</b>。</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>任务</th><th>来源 NPC（楼层）</th><th class="left">目标</th><th class="left">奖励</th></tr></thead>
+      <tbody>
+        <tr><td>初入魔塔</td><td>老祭司（1）</td><td class="left">抵达第 3 层</td><td class="left">金币 30 · 攻击 +3</td></tr>
+        <tr><td>幽灵之患</td><td>狩猎队长（5）</td><td class="left">击杀 3 只幽灵（模板 4）</td><td class="left">金币 50 · 攻击 +5</td></tr>
+        <tr><td>生命之泉</td><td>药师（10）</td><td class="left">拾取 5 瓶生命药水·小（模板 1）</td><td class="left">生命上限 +200</td></tr>
+        <tr><td>铁甲之壁</td><td>铁甲队长（20）</td><td class="left">击杀 2 名铁甲骑士（模板 10）</td><td class="left">金币 120 · 防御 +10</td></tr>
+        <tr><td>深渊守望</td><td>深渊守望者（50）</td><td class="left">抵达第 50 层</td><td class="left">金币 500 · 攻击 +20 · 防御 +20</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul>
+      <li><b>击杀统计</b>：击杀怪物按「模板 ID」累计（KillByTemplate），任务进度实时显示「2/3」；</li>
+      <li><b>拾取统计</b>：拾取道具同样按模板累计（PickByTemplate）；</li>
+      <li><b>抵达统计</b>：以玩家当前楼层判定，到达目标层即可交付；</li>
+      <li>任务交付后不会重复发放奖励；已完成的任务 NPC 会显示感谢语。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>八、存档与读档</h2>
+    <ul>
+      <li><kbd>F5</kbd> 存档：写入 <code>%LOCALAPPDATA%\Mota100Floors\save.json</code>（临时文件 + 原子覆盖，防损坏）；</li>
+      <li><kbd>F9</kbd> 读档：恢复玩家属性、当前楼层与坐标、怪物存活、道具拾取、已开门（增量）、任务状态与击杀/拾取统计；</li>
+      <li>存档为「增量合并」语义：怪物<b>复生</b>（重新存活）后再次存档，会从死亡清单中移除该条目；</li>
+      <li>损坏或更高版本的存档会被拒绝读取（返回「未找到有效存档」）。</li>
+    </ul>
+  </section>
+<section class="card">
+    <h2>九、怪物手册（<kbd>B</kbd> 键）</h2>
+    <p>任意时刻按 <kbd>B</kbd>（或点击顶部「怪物手册 B」按钮）打开手册，列出全部 41 种怪物的
+       生命 / 攻击 / 防御 / 金币 / 素材贴图，并实时计算<b>当前预估损失</b>与可战胜判定：</p>
+    <ul>
+      <li><b>预估损失 = 击杀所需回合数 × 怪物每回合伤害</b>，与 <a href="combat.html">战斗规则</a>公式一致，所见即所得；</li>
+      <li>法师系怪物标注「<b>魔法·无视防御</b>」，其伤害直接等于攻击力、不扣除防御；</li>
+      <li>「✓ 可战胜」绿色 /「✗ 暂不可战胜」红色，随角色属性实时刷新；再次按 <kbd>B</kbd>、按 <kbd>Esc</kbd> 或点「关闭」退出。</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  魔塔 100 层 · 交互规则 · 守门门槛与任务系统见下
+</footer>
+
+</body>
+</html>

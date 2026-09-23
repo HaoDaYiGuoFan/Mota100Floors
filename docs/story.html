@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>剧情设定 · 魔塔 100 层 GDD</title>
+<link rel="stylesheet" href="assets/css/mota.css" />
+<script defer src="assets/js/mota.js"></script>
+</head>
+<body data-page="story">
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">魔塔 100 层
+      <small>Mota 100 Floors · GDD</small>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html" data-page="index">总览</a>
+      <a href="story.html" data-page="story">剧情设定</a>
+      <a href="interaction.html" data-page="interaction">交互规则</a>
+      <a href="combat.html" data-page="combat">战斗规则</a>
+      <a href="content.html" data-page="content">内容清单</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <div class="hero">
+    <h1>剧情设定</h1>
+    <p class="sub">魔塔原版剧情 · 世界观 · 主线脉络 · 塔中人物</p>
+  </div>
+
+  <section class="card">
+    <h2>一、世界观</h2>
+    <p>古老的东方大陆中央，矗立着一座通天魔塔。塔身共 100 层，是上古神战时期魔王「加坦杰厄」与七位勇者决战之地。
+      战败的魔王被封印于塔顶，七枚封印之匙散落在塔中各处；而传说中能弑神的圣剑，则沉睡于塔顶的圣棺之中。</p>
+    <p>魔王虽被封印，其魔力仍使塔内怪物滋生、回廊扭曲。大陆各处的冒险者前赴后继地尝试登塔——
+      有人为荣誉、有人为财富、也有人为了塔中失踪的亲人。而你，正是被「老祭司」指引而来的一名新勇者。</p>
+  </section>
+
+  <section class="card">
+    <h2>二、主线脉络（按楼层段）</h2>
+    <table>
+      <thead><tr><th>楼层段</th><th>篇章</th><th class="left">剧情要点</th></tr></thead>
+      <tbody>
+        <tr><td>1 ~ 10</td><td>初入魔塔</td><td class="left">老祭司交托使命；消灭幽灵之患、熟悉钥匙与商店；第 5 层石像鬼守卫检验你的力量。</td></tr>
+        <tr><td>11 ~ 30</td><td>试炼之地</td><td class="left">回廊互相连通，可折返变强；铁甲骑士与石魔像盘踞要塞，考验破防与防御。</td></tr>
+        <tr><td>31 ~ 50</td><td>深渊回廊</td><td class="left">巫妖与暗黑骑士军团出现；深渊守望者记录每一位勇者，50 层之前设下防御门槛。</td></tr>
+        <tr><td>51 ~ 80</td><td>神魔战场</td><td class="left">龙族幼崽、冰霜巨龙与炼狱领主构成防线；老铁匠教你「先求无伤，再求速胜」。</td></tr>
+        <tr><td>81 ~ 99</td><td>末日审判</td><td class="left">上古石像与魔神级怪物把守；先知预言「弑神之剑就在塔顶的圣棺之中」。</td></tr>
+        <tr><td>100</td><td>魔王所在</td><td class="left">魔王·加坦杰厄（HP 60000）坐镇塔顶棋盘。击败它，塔的封印就此解除。</td></tr>
+      </tbody>
+    </table>
+  </section>
+<section class="card">
+    <h2>三、塔中人物（NPC 清单）</h2>
+    <p>以下为登塔途中可遇见的剧情 NPC（不含 15 座商店的旅行商人）。带<span class="badge quest">任务</span>标记者可接取/交付任务；
+      带<span class="badge guard">守门</span>标记者会以属性门槛拦路。</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>NPC</th><th>楼层</th><th class="left">身份 / 台词主题</th><th>类型</th></tr></thead>
+      <tbody>
+        <tr><td>老祭司</td><td>1</td><td class="left">指引勇者，交托使命与首个任务</td><td><span class="badge quest">任务</span></td></tr>
+        <tr><td>守卫</td><td>3</td><td class="left">讲解红/蓝门后的回廊更危险</td><td>剧情</td></tr>
+        <tr><td>受伤的旅人</td><td>4</td><td class="left">铁甲骑士难以破防的劝告</td><td>剧情</td></tr>
+        <tr><td>石像鬼守卫</td><td>5</td><td class="left">试炼之路关口：攻击力 ≥ 20</td><td><span class="badge guard">守门</span></td></tr>
+        <tr><td>狩猎队长</td><td>5</td><td class="left">幽灵之患（任务）</td><td><span class="badge quest">任务</span></td></tr>
+        <tr><td>魔法屏障守卫</td><td>10</td><td class="left">古魔法屏障：防御力 ≥ 30</td><td><span class="badge guard">守门</span></td></tr>
+        <tr><td>药师</td><td>10</td><td class="left">生命之泉·药水（任务）</td><td><span class="badge quest">任务</span></td></tr>
+        <tr><td>烈焰石像</td><td>20</td><td class="left">熔岩通道：攻击力 ≥ 60</td><td><span class="badge guard">守门</span></td></tr>
+        <tr><td>铁甲队长</td><td>20</td><td class="left">斩铁甲骑士（任务）</td><td><span class="badge quest">任务</span></td></tr>
+        <tr><td>贤者</td><td>30</td><td class="left">塔顶魔王的真相与选择的重量</td><td>剧情</td></tr>
+        <tr><td>神秘人</td><td>40</td><td class="left">耐心与技术并存，可折返变强</td><td>剧情</td></tr>
+        <tr><td>深渊之门守卫</td><td>50</td><td class="left">深渊领域：防御力 ≥ 80</td><td><span class="badge guard">守门</span></td></tr>
+        <tr><td>深渊守望者</td><td>50</td><td class="left">抵达 50 层的祝福（任务）</td><td><span class="badge quest">任务</span></td></tr>
+        <tr><td>守石老人</td><td>60</td><td class="left">第一代勇者的见证者</td><td>剧情</td></tr>
+        <tr><td>钢铁守门人</td><td>80</td><td class="left">古代军团兵械库：防御力 ≥ 180</td><td><span class="badge guard">守门</span></td></tr>
+        <tr><td>老铁匠</td><td>80</td><td class="left">先求无伤，再求速胜的战术心法</td><td>剧情</td></tr>
+        <tr><td>先知</td><td>90</td><td class="left">弑神之剑在塔顶圣棺的预言</td><td>剧情</td></tr>
+        <tr><td>末日之门守卫</td><td>90</td><td class="left">神魔战场大门：攻击力 ≥ 260</td><td><span class="badge guard">守门</span></td></tr>
+        <tr><td>深渊情报官</td><td>99</td><td class="left">魔王·加坦杰厄的情报</td><td>剧情</td></tr>
+        <tr><td>魔王之影</td><td>100</td><td class="left">塔之尽头的最后独白</td><td>剧情</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>四、关键剧情意象</h2>
+    <ul>
+      <li><b>钥匙（黄 / 蓝 / 红）</b>：封印通道的三种封印，由弱至强，象征勇气、智慧与王者之力。</li>
+      <li><b>生命药水 / 圣光药剂</b>：远征的补给，也是「活下去才能走到最后」的隐喻。</li>
+      <li><b>力量宝石 / 守护宝石</b>：攻与防的此消彼长，是魔塔数值玩法的核心意象。</li>
+      <li><b>弑神之剑</b>：传说中唯一的弑神武器，回应「真正的勇者」，指向最终一击。</li>
+      <li><b>勇者之名</b>：每层被击败的旧勇者遗物化作提示 NPC 与道具，提醒后来者「耐心与选择」。</li>
+    </ul>
+    <div class="note">本项目的剧情根据经典《魔塔》的设定进行扩展演绎，用于单机学习项目，不用于任何商业用途。</div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  魔塔 100 层 · 剧情设定 · 详细 NPC 与事件分布见「内容清单」
+</footer>
+
+</body>
+</html>

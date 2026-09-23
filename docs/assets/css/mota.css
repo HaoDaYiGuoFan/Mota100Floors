@@ -1,0 +1,255 @@
+/* ============================================================
+   魔塔 100 层 · GDD 网站样式（魔塔原版剧情交互与战斗规则）
+   主题：复古羊皮纸 + 金色点缀，暖色明亮，开放本地离线浏览
+   ============================================================ */
+:root {
+  --bg: #FDF6E7;
+  --bg-deep: #F7E8C8;
+  --paper: #FFFDF8;
+  --ink: #3A2E1E;
+  --ink-soft: #6B5A42;
+  --gold: #C89B3C;
+  --gold-deep: #9A6B1F;
+  --gold-soft: #E8D19A;
+  --red: #C0392B;
+  --blue: #2E6DA4;
+  --green: #3E7C32;
+  --line: #E5D3A8;
+  --shadow: 0 2px 8px rgba(154, 107, 31, .18);
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+/* ---------- 顶栏 ---------- */
+.site-header {
+  background: linear-gradient(90deg, #6B3A00 0%, #B8701E 55%, #D98300 100%);
+  color: #FFF7E8;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.header-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.brand {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.brand small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #FFE3A6;
+}
+
+/* ---------- 导航 ---------- */
+.site-nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.site-nav a {
+  color: #FFF7E8;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  transition: background .2s, color .2s;
+}
+.site-nav a:hover { background: rgba(255, 255, 255, .22); }
+.site-nav a.active { background: #FFF1CF; color: #6B3A00; border-color: #FFF1CF; }
+
+/* ---------- 主容器 ---------- */
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  text-align: center;
+  padding: 42px 24px 30px;
+  background: linear-gradient(135deg, var(--paper) 0%, #FFF3D6 100%);
+  border: 1px solid var(--gold-soft);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+}
+.hero h1 { margin: 0 0 10px; font-size: 40px; color: var(--gold-deep); letter-spacing: 4px; }
+.hero .sub { font-size: 18px; color: var(--ink-soft); }
+.hero .badges { margin-top: 16px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- 小标签 ---------- */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #7A4E00;
+  background: #FFE9B0;
+  border: 1px solid var(--gold-soft);
+}
+.badge.guard { background: #F5D0D0; color: #8E1F1F; border-color: #E8AFAF; }
+.badge.quest { background: #CFE6CF; color: #25601F; border-color: #A8CFA8; }
+.badge.red { background: #FADBD8; color: #922B21; border-color: #F0B9B4; }
+.badge.blue { background: #D4E6F5; color: #20547E; border-color: #A9CCE8; }
+
+/* ---------- 章节 ---------- */
+section.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  margin-bottom: 26px;
+  box-shadow: var(--shadow);
+}
+section h2 { margin-top: 0; color: var(--gold-deep); font-size: 26px; border-bottom: 2px dashed var(--gold-soft); padding-bottom: 8px; }
+section h3 { color: var(--gold-deep); font-size: 20px; margin: 22px 0 8px; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0 8px 4px; padding-left: 22px; }
+li { margin: 5px 0; }
+em.hl { color: var(--red); font-style: normal; font-weight: 700; }
+
+/* ---------- 表格 ---------- */
+.table-wrap { overflow-x: auto; margin: 12px 0; }
+.table-wrap input[type="search"] {
+  width: 260px;
+  max-width: 100%;
+  padding: 7px 12px;
+  margin: 8px 0 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 14px;
+  background: #FFFEFB;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  background: #FFFEFB;
+}
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+th {
+  background: linear-gradient(180deg, #F9E9C2, #F0D9A0);
+  color: var(--gold-deep);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+tbody tr:nth-child(even) { background: #FBF4E4; }
+td.num { font-variant-numeric: tabular-nums; }
+td.left, th.left { text-align: left; }
+tr.boss td { background: #FBE7E4 !important; color: #8E1F1F; font-weight: 700; }
+
+/* ---------- 公式 / 提示框 ---------- */
+.formula {
+  background: linear-gradient(135deg, #FFFBEF, #FBF0D8);
+  border: 1px solid var(--gold-soft);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-family: "Consolas", "Cascadia Mono", "Microsoft YaHei", monospace;
+  font-size: 15px;
+  color: #7A4E00;
+  overflow-x: auto;
+}
+.note {
+  background: #EEF5FB;
+  border: 1px solid #C4D9EC;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 12px 0;
+  color: #23567E;
+}
+.warn {
+  background: #FDF0EF;
+  border: 1px solid #EBC4BC;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 12px 0;
+  color: #8E2A20;
+}
+
+/* ---------- 卡片网格 ---------- */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin: 18px 0;
+}
+.grid-cards a {
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 18px;
+  transition: transform .18s, box-shadow .18s;
+  box-shadow: var(--shadow);
+}
+.grid-cards a:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(154, 107, 31, .28); }
+.grid-cards h3 { margin: 0 0 6px; color: var(--gold-deep); }
+.grid-cards p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+
+/* ---------- kbd ---------- */
+kbd {
+  background: #FFF3CE;
+  border: 1px solid var(--gold-soft);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #7A4E00;
+  font-family: Consolas, monospace;
+}
+
+/* ---------- 页脚 ---------- */
+.site-footer {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+  padding: 22px 10px 30px;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 700px) {
+  .site-nav a { font-size: 13px; padding: 5px 10px; }
+  .hero h1 { font-size: 28px; }
+  section.card { padding: 16px 14px; }
+  th, td { padding: 6px 7px; font-size: 13px; }
+}
+
+/* ---------- 打印 ---------- */
+@media print {
+  .site-header { position: static; }
+  body { background: #fff; }
+}

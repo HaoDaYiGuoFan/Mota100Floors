@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>战斗规则 · 魔塔 100 层 GDD</title>
+<link rel="stylesheet" href="assets/css/mota.css" />
+<script defer src="assets/js/mota.js"></script>
+</head>
+<body data-page="combat">
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">魔塔 100 层
+      <small>Mota 100 Floors · GDD</small>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html" data-page="index">总览</a>
+      <a href="story.html" data-page="story">剧情设定</a>
+      <a href="interaction.html" data-page="interaction">交互规则</a>
+      <a href="combat.html" data-page="combat">战斗规则</a>
+      <a href="content.html" data-page="content">内容清单</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <div class="hero">
+    <h1>战斗规则</h1>
+    <p class="sub">回合制伤害公式 · 无伤判定 · 自动结算 · 41 种怪物全数据</p>
+  </div>
+
+  <section class="card">
+    <h2>一、伤害公式</h2>
+    <p>战斗为<b>自动回合制</b>：走上怪物格即开始结算，玩家先手。双方每回合各攻击一次，
+      直至一方生命归零；怪物不回复、无特殊技能，数值即一切。</p>
+    <div class="formula">
+      玩家每回合伤害 = max(1, 玩家攻击 − 怪物防御)<br />
+      怪物每回合伤害 = max(1, 怪物攻击 − 玩家防御)<br />
+      击杀所需回合数 = ⌈怪物生命 ÷ 玩家每回合伤害⌉<br />
+      预估总损失 = 回合数 × 怪物每回合伤害
+    </div>
+    <ul>
+      <li>攻击 ≤ 怪物防御时，玩家伤害仍保底为 <b>1</b>（可磨死但回合数极长，不推荐）；</li>
+      <li>怪物攻击 ≤ 玩家防御时，怪物伤害同样保底 <b>1</b>；</li>
+      <li>生命上限只影响拾取/商店回血的封顶值，不影响战斗伤害结算。</li>
+    </ul>
+    <div class="warn">法师系怪物<b>无视玩家防御</b>：闪电法师（#18）、水晶灵体（#24）、邪眼魔（#25）、混沌魔裔（#32）、暗影主宰（#35）、魔神（#40）的每回合伤害<b>不扣除玩家防御</b>，直接等于其攻击力（保底 1）。战斗预估与怪物手册均按此计算，无任何随机量。</div>
+  </section>
+
+  <section class="card">
+    <h2>二、自动结算与无伤判定</h2>
+    <ol>
+      <li>走上怪物格 → 引擎计算「回合数 / 每回合伤害 / 预估总损失」并<b>先做预算</b>；</li>
+      <li><b>打不过</b>（预估总损失 ≥ 当前生命）→ 放弃战斗，玩家原地停留，提示「需 N 回合、每回合损失 M… 提升攻击/防御后再来」；</li>
+      <li><b>打得过</b> → 扣除预估伤害、获得金币、怪物标记死亡、统计击杀（KillByTemplate）、格子变为地板；</li>
+      <li>当前楼层为 100 且击败 BOSS → 置 <b>胜利状态</b>（IsWin）；</li>
+      <li>战斗消息展示「耗时 N 回合，损失 X 生命，获得 Y 金币」，玩家属性同步刷新。</li>
+    </ol>
+    <div class="note">预估采用「理论伤害」，即所有回合造成的伤害线性累加，与实际回合制完全一致——不存在暴击/闪避等随机量，结果可精确预测。</div>
+  </section>
+
+  <section class="card">
+    <h2>三、难度分层（Tier）</h2>
+    <table>
+      <thead><tr><th>层段</th><th>Tier</th><th class="left">代表怪物</th><th class="left">战斗定位</th></tr></thead>
+      <tbody>
+        <tr><td>1 ~ 40</td><td>0</td><td class="left">小蝙蝠 → 铁甲骑士</td><td class="left">教学与破防；考验攻防基础与钥匙路线</td></tr>
+        <tr><td>41 ~ 70</td><td>1</td><td class="left">暗影刺客 → 龙族幼崽</td><td class="left">中层试炼；高攻怪迫使玩家堆防御</td></tr>
+        <tr><td>71 ~ 90</td><td>2</td><td class="left">岩石巨魔 → 虚空行者</td><td class="left">神魔战场；攻防双检验</td></tr>
+        <tr><td>91 ~ 100</td><td>3</td><td class="left">深渊恶魔 → 魔神</td><td class="left">末日审判；最终 BOSS 魔王·加坦杰厄</td></tr>
+      </tbody>
+    </table>
+  </section>
+<section class="card">
+    <h2>四、怪物全数据（41 种）</h2>
+    <p>下表与 <code>Data/Monsters.json</code> 完全一致（可按名称/楼层段搜索过滤）。
+      <b>✦ = 攻击无视玩家防御的法师系怪物</b>（18 闪电法师 · 24 水晶灵体 · 25 邪眼魔 · 32 混沌魔裔 · 35 暗影主宰 · 40 魔神）。</p>
+    <div class="table-wrap">
+      <input type="search" data-filter="monster-table" placeholder="🔍 筛选怪物名称…" />
+      <table id="monster-table">
+        <thead><tr><th>#</th><th>名称</th><th>生命</th><th>攻击</th><th>防御</th><th>金币</th><th>Tier</th><th>BOSS</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>小蝙蝠</td><td>15</td><td>5</td><td>0</td><td>2</td><td>0</td><td>否</td></tr>
+          <tr><td>2</td><td>史莱姆</td><td>30</td><td>8</td><td>1</td><td>4</td><td>0</td><td>否</td></tr>
+          <tr><td>3</td><td>骷髅兵</td><td>50</td><td>12</td><td>3</td><td>8</td><td>0</td><td>否</td></tr>
+          <tr><td>4</td><td>幽灵</td><td>40</td><td>15</td><td>5</td><td>10</td><td>0</td><td>否</td></tr>
+          <tr><td>5</td><td>巨型蜘蛛</td><td>100</td><td>18</td><td>6</td><td>12</td><td>0</td><td>否</td></tr>
+          <tr><td>6</td><td>兽人步兵</td><td>80</td><td>20</td><td>8</td><td>15</td><td>0</td><td>否</td></tr>
+          <tr><td>7</td><td>骷髅队长</td><td>120</td><td>25</td><td>10</td><td>20</td><td>0</td><td>否</td></tr>
+          <tr><td>8</td><td>石像鬼</td><td>150</td><td>30</td><td>15</td><td>25</td><td>0</td><td>否</td></tr>
+          <tr><td>9</td><td>蝙蝠王</td><td>180</td><td>35</td><td>18</td><td>30</td><td>0</td><td>否</td></tr>
+          <tr><td>10</td><td>铁甲骑士</td><td>220</td><td>40</td><td>22</td><td>40</td><td>0</td><td>否</td></tr>
+          <tr><td>11</td><td>暗影刺客</td><td>200</td><td>45</td><td>20</td><td>50</td><td>1</td><td>否</td></tr>
+          <tr><td>12</td><td>沼泽巨蟒</td><td>300</td><td>55</td><td>28</td><td>65</td><td>1</td><td>否</td></tr>
+          <tr><td>13</td><td>狼人</td><td>260</td><td>60</td><td>30</td><td>70</td><td>1</td><td>否</td></tr>
+          <tr><td>14</td><td>巫妖</td><td>350</td><td>70</td><td>35</td><td>85</td><td>1</td><td>否</td></tr>
+          <tr><td>15</td><td>石魔像</td><td>450</td><td>65</td><td>50</td><td>90</td><td>1</td><td>否</td></tr>
+          <tr><td>16</td><td>火焰恶魔</td><td>400</td><td>80</td><td>40</td><td>110</td><td>1</td><td>否</td></tr>
+          <tr><td>17</td><td>暗黑骑士</td><td>550</td><td>90</td><td>55</td><td>130</td><td>1</td><td>否</td></tr>
+          <tr><td>18</td><td>闪电法师</td><td>500</td><td>95</td><td>45</td><td>140</td><td>1</td><td>否</td></tr>
+          <tr><td>19</td><td>深渊守卫</td><td>700</td><td>105</td><td>60</td><td>160</td><td>1</td><td>否</td></tr>
+          <tr><td>20</td><td>龙族幼崽</td><td>800</td><td>115</td><td>65</td><td>180</td><td>1</td><td>否</td></tr>
+          <tr><td>21</td><td>岩石巨魔</td><td>900</td><td>120</td><td>70</td><td>190</td><td>2</td><td>否</td></tr>
+          <tr><td>22</td><td>地狱犬</td><td>850</td><td>130</td><td>65</td><td>200</td><td>2</td><td>否</td></tr>
+          <tr><td>23</td><td>狂爆兽人</td><td>1000</td><td>145</td><td>80</td><td>220</td><td>2</td><td>否</td></tr>
+          <tr><td>24</td><td>水晶灵体</td><td>1100</td><td>135</td><td>90</td><td>230</td><td>2</td><td>否</td></tr>
+          <tr><td>25</td><td>邪眼魔</td><td>1300</td><td>155</td><td>95</td><td>260</td><td>2</td><td>否</td></tr>
+          <tr><td>26</td><td>钢铁傀儡</td><td>1500</td><td>150</td><td>120</td><td>270</td><td>2</td><td>否</td></tr>
+          <tr><td>27</td><td>暗影魔王</td><td>1700</td><td>175</td><td>110</td><td>300</td><td>2</td><td>否</td></tr>
+          <tr><td>28</td><td>冰霜巨龙</td><td>2000</td><td>190</td><td>130</td><td>340</td><td>2</td><td>否</td></tr>
+          <tr><td>29</td><td>炼狱领主</td><td>2400</td><td>210</td><td>140</td><td>380</td><td>2</td><td>否</td></tr>
+          <tr><td>30</td><td>虚空行者</td><td>2800</td><td>230</td><td>150</td><td>420</td><td>2</td><td>否</td></tr>
+          <tr><td>31</td><td>深渊恶魔</td><td>3000</td><td>245</td><td>160</td><td>450</td><td>3</td><td>否</td></tr>
+          <tr><td>32</td><td>混沌魔裔</td><td>3500</td><td>270</td><td>175</td><td>500</td><td>3</td><td>否</td></tr>
+          <tr><td>33</td><td>末日使者</td><td>4000</td><td>300</td><td>190</td><td>560</td><td>3</td><td>否</td></tr>
+          <tr><td>34</td><td>上古石像</td><td>4800</td><td>290</td><td>230</td><td>600</td><td>3</td><td>否</td></tr>
+          <tr><td>35</td><td>暗影主宰</td><td>5500</td><td>330</td><td>210</td><td>660</td><td>3</td><td>否</td></tr>
+          <tr><td>36</td><td>灭世邪龙</td><td>6500</td><td>360</td><td>240</td><td>720</td><td>3</td><td>否</td></tr>
+          <tr><td>37</td><td>冥府判官</td><td>7500</td><td>400</td><td>260</td><td>800</td><td>3</td><td>否</td></tr>
+          <tr><td>38</td><td>混沌之主</td><td>9000</td><td>440</td><td>280</td><td>900</td><td>3</td><td>否</td></tr>
+          <tr><td>39</td><td>深渊之主</td><td>11000</td><td>490</td><td>310</td><td>1000</td><td>3</td><td>否</td></tr>
+          <tr><td>40</td><td>魔神</td><td>13000</td><td>540</td><td>340</td><td>1100</td><td>3</td><td>否</td></tr>
+          <tr class="boss"><td>41</td><td>魔王·加坦杰厄</td><td>60000</td><td>800</td><td>400</td><td>0</td><td>3</td><td>是</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  魔塔 100 层 · 战斗规则 · 怪物全数据表见下
+</footer>
+
+</body>
+</html>

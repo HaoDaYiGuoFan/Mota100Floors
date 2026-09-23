@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Mota100Floors.csproj" />
+  <Project Path="MotaMapGenerator/MotaMapGenerator.csproj" />
+</Solution>

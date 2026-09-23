@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Mota100Floors</RootNamespace>
+    <AssemblyName>Mota100Floors</AssemblyName>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Description>魔塔 100 层 - .NET 10 WPF 单机回合制 RPG</Description>
+    <!-- MotaMapGenerator 是嵌套的独立工具项目，需从主项目默认 glob（Compile/None/Resource 等）中整体排除，
+         否则其 obj\Release 下生成的 AssemblyInfo.cs 等会被当作主项目源码编译，导致 CS0579 程序集特性重复 -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);MotaMapGenerator\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+  </ItemGroup>
+
+  <!-- 内置资源：瓦片/玩家/怪物/道具图片（占位目录，后续可放 PNG 并设为 Resource）；icon.ico 用于 exe 与窗口图标 -->
+  <ItemGroup>
+    <Resource Include="Assets\icon.ico" />
+    <Resource Include="Assets\**\*.png" />
+    <Resource Include="Assets\**\*.jpg" />
+    <None Include="Data\Floors\*.json" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="Data\Monsters.json" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="Data\Items.json" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="Data\Quests.json" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="Data\ShopConfig.json" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="Assets\Audio\*.wav" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="Assets\Audio\*.mp3" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="Assets\Audio\*.ogg" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+</Project>
