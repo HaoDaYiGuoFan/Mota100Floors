@@ -19,7 +19,7 @@
     {
       "Id": 1,
       "TemplateId": 1,
-      "Name": "\u7EFF\u8272\u53F2\u83B1\u59C6",
+      "Name": "\u7eff\u8272\u53f2\u83b1\u59c6",
       "Hp": 35,
       "Attack": 18,
       "Defense": 1,
@@ -33,7 +33,7 @@
     {
       "Id": 2,
       "TemplateId": 3,
-      "Name": "\u5C0F\u8759\u8760",
+      "Name": "\u5c0f\u8759\u8760",
       "Hp": 50,
       "Attack": 18,
       "Defense": 4,
@@ -47,7 +47,7 @@
     {
       "Id": 3,
       "TemplateId": 3,
-      "Name": "\u5C0F\u8759\u8760",
+      "Name": "\u5c0f\u8759\u8760",
       "Hp": 50,
       "Attack": 18,
       "Defense": 4,
@@ -61,7 +61,7 @@
     {
       "Id": 4,
       "TemplateId": 3,
-      "Name": "\u5C0F\u8759\u8760",
+      "Name": "\u5c0f\u8759\u8760",
       "Hp": 50,
       "Attack": 18,
       "Defense": 4,
@@ -75,7 +75,7 @@
     {
       "Id": 5,
       "TemplateId": 1,
-      "Name": "\u7EFF\u8272\u53F2\u83B1\u59C6",
+      "Name": "\u7eff\u8272\u53f2\u83b1\u59c6",
       "Hp": 35,
       "Attack": 18,
       "Defense": 1,
@@ -89,7 +89,7 @@
     {
       "Id": 6,
       "TemplateId": 3,
-      "Name": "\u5C0F\u8759\u8760",
+      "Name": "\u5c0f\u8759\u8760",
       "Hp": 50,
       "Attack": 18,
       "Defense": 4,
@@ -103,7 +103,7 @@
     {
       "Id": 7,
       "TemplateId": 3,
-      "Name": "\u5C0F\u8759\u8760",
+      "Name": "\u5c0f\u8759\u8760",
       "Hp": 50,
       "Attack": 18,
       "Defense": 4,
@@ -117,7 +117,7 @@
     {
       "Id": 8,
       "TemplateId": 3,
-      "Name": "\u5C0F\u8759\u8760",
+      "Name": "\u5c0f\u8759\u8760",
       "Hp": 50,
       "Attack": 18,
       "Defense": 4,
@@ -131,7 +131,7 @@
     {
       "Id": 9,
       "TemplateId": 2,
-      "Name": "\u7EA2\u8272\u53F2\u83B1\u59C6",
+      "Name": "\u7ea2\u8272\u53f2\u83b1\u59c6",
       "Hp": 45,
       "Attack": 20,
       "Defense": 2,
@@ -145,7 +145,7 @@
     {
       "Id": 10,
       "TemplateId": 2,
-      "Name": "\u7EA2\u8272\u53F2\u83B1\u59C6",
+      "Name": "\u7ea2\u8272\u53f2\u83b1\u59c6",
       "Hp": 45,
       "Attack": 20,
       "Defense": 2,
@@ -159,7 +159,7 @@
     {
       "Id": 11,
       "TemplateId": 3,
-      "Name": "\u5C0F\u8759\u8760",
+      "Name": "\u5c0f\u8759\u8760",
       "Hp": 50,
       "Attack": 18,
       "Defense": 4,
@@ -173,7 +173,7 @@
     {
       "Id": 12,
       "TemplateId": 2,
-      "Name": "\u7EA2\u8272\u53F2\u83B1\u59C6",
+      "Name": "\u7ea2\u8272\u53f2\u83b1\u59c6",
       "Hp": 45,
       "Attack": 20,
       "Defense": 2,
@@ -187,7 +187,7 @@
     {
       "Id": 13,
       "TemplateId": 2,
-      "Name": "\u7EA2\u8272\u53F2\u83B1\u59C6",
+      "Name": "\u7ea2\u8272\u53f2\u83b1\u59c6",
       "Hp": 45,
       "Attack": 20,
       "Defense": 2,
@@ -197,14 +197,28 @@
       "IsAlive": true,
       "IsBoss": false,
       "Tier": 0
+    },
+    {
+      "Id": 14,
+      "TemplateId": 2,
+      "Name": "\u7ea2\u8272\u53f2\u83b1\u59c6",
+      "Hp": 45,
+      "Attack": 20,
+      "Defense": 2,
+      "GoldReward": 3,
+      "X": 11,
+      "Y": 4,
+      "IsAlive": true,
+      "IsBoss": false,
+      "Tier": 0
     }
   ],
   "ItemsOnFloor": [
     {
       "Id": 1,
       "TemplateId": 1,
-      "Name": "\u7EA2\u836F\u6C34",
-      "Desc": "\u6062\u590D 100 \u70B9\u751F\u547D",
+      "Name": "\u7ea2\u836f\u6c34",
+      "Desc": "\u6062\u590d 100 \u70b9\u751f\u547d",
       "Type": "Hp",
       "KeyType": "Yellow",
       "Value": 100,
@@ -215,8 +229,8 @@
     {
       "Id": 2,
       "TemplateId": 1,
-      "Name": "\u7EA2\u836F\u6C34",
-      "Desc": "\u6062\u590D 100 \u70B9\u751F\u547D",
+      "Name": "\u7ea2\u836f\u6c34",
+      "Desc": "\u6062\u590d 100 \u70b9\u751f\u547d",
       "Type": "Hp",
       "KeyType": "Yellow",
       "Value": 100,
@@ -227,8 +241,8 @@
     {
       "Id": 3,
       "TemplateId": 5,
-      "Name": "\u7EA2\u5B9D\u77F3",
-      "Desc": "\u653B\u51FB \u002B2",
+      "Name": "\u7ea2\u5b9d\u77f3",
+      "Desc": "\u653b\u51fb +2",
       "Type": "Attack",
       "KeyType": "Yellow",
       "Value": 2,
@@ -239,8 +253,8 @@
     {
       "Id": 4,
       "TemplateId": 9,
-      "Name": "\u84DD\u5B9D\u77F3",
-      "Desc": "\u9632\u5FA1 \u002B2",
+      "Name": "\u84dd\u5b9d\u77f3",
+      "Desc": "\u9632\u5fa1 +2",
       "Type": "Defense",
       "KeyType": "Yellow",
       "Value": 2,
@@ -249,22 +263,10 @@
       "PickedUp": false
     },
     {
-      "Id": 5,
-      "TemplateId": 9,
-      "Name": "\u84DD\u5B9D\u77F3",
-      "Desc": "\u9632\u5FA1 \u002B2",
-      "Type": "Defense",
-      "KeyType": "Yellow",
-      "Value": 2,
-      "X": 14,
-      "Y": 4,
-      "PickedUp": false
-    },
-    {
       "Id": 6,
       "TemplateId": 13,
-      "Name": "\u9EC4\u94A5\u5319",
-      "Desc": "\u53EF\u6253\u5F00\u9EC4\u8272\u95E8",
+      "Name": "\u9ec4\u94a5\u5319",
+      "Desc": "\u53ef\u6253\u5f00\u9ec4\u8272\u95e8",
       "Type": "Key",
       "KeyType": "Yellow",
       "Value": 1,
@@ -273,46 +275,10 @@
       "PickedUp": false
     },
     {
-      "Id": 7,
-      "TemplateId": 13,
-      "Name": "\u9EC4\u94A5\u5319",
-      "Desc": "\u53EF\u6253\u5F00\u9EC4\u8272\u95E8",
-      "Type": "Key",
-      "KeyType": "Yellow",
-      "Value": 1,
-      "X": 12,
-      "Y": 6,
-      "PickedUp": false
-    },
-    {
-      "Id": 8,
-      "TemplateId": 13,
-      "Name": "\u9EC4\u94A5\u5319",
-      "Desc": "\u53EF\u6253\u5F00\u9EC4\u8272\u95E8",
-      "Type": "Key",
-      "KeyType": "Yellow",
-      "Value": 1,
-      "X": 1,
-      "Y": 5,
-      "PickedUp": false
-    },
-    {
-      "Id": 9,
-      "TemplateId": 13,
-      "Name": "\u9EC4\u94A5\u5319",
-      "Desc": "\u53EF\u6253\u5F00\u9EC4\u8272\u95E8",
-      "Type": "Key",
-      "KeyType": "Yellow",
-      "Value": 1,
-      "X": 1,
-      "Y": 4,
-      "PickedUp": false
-    },
-    {
       "Id": 10,
       "TemplateId": 16,
-      "Name": "\u98DE\u884C\u5668",
-      "Desc": "\u697C\u5C42\u7A7F\u68AD\u673A\uFF0C\u5728\u697C\u68AF\u65C1\u4F7F\u7528\uFF0C\u8DF3\u8F6C\u81F3\u5DF2\u63A2\u7D22\u697C\u5C42\uFF0C\u65E0\u4F7F\u7528\u6B21\u6570",
+      "Name": "\u98de\u884c\u5668",
+      "Desc": "\u697c\u5c42\u7a7f\u68ad\u673a\uff0c\u5728\u697c\u68af\u65c1\u4f7f\u7528\uff0c\u8df3\u8f6c\u81f3\u5df2\u63a2\u7d22\u697c\u5c42\uff0c\u65e0\u4f7f\u7528\u6b21\u6570",
       "Type": "FlyOrb",
       "KeyType": "Yellow",
       "Value": 0,
@@ -327,8 +293,8 @@
       "Type": "TalkNPC",
       "X": 2,
       "Y": 7,
-      "Name": "\u5B88\u536B",
-      "Text": "\u5C0F\u5FC3\uFF01\u9EC4\u8272\u94A5\u5319\u901A\u5E38\u5C31\u5728\u8D77\u70B9\u9644\u8FD1\uFF0C\u5148\u6536\u96C6\u94A5\u5319\u518D\u6311\u6218\u95E8\u540E\u7684\u602A\u7269\u3002",
+      "Name": "\u5b88\u536b",
+      "Text": "\u5c0f\u5fc3\uff01\u9ec4\u8272\u94a5\u5319\u901a\u5e38\u5c31\u5728\u8d77\u70b9\u9644\u8fd1\uff0c\u5148\u6536\u96c6\u94a5\u5319\u518d\u6311\u6218\u95e8\u540e\u7684\u602a\u7269\u3002",
       "ShopId": null
     }
   ]

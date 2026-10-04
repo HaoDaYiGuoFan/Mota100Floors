@@ -368,6 +368,8 @@ public partial class MainWindow : Window
                     Fill = fill,
                     ToolTip = string.IsNullOrEmpty(tooltip) ? null : tooltip,
                 };
+                // 像素贴图（32/48px）在非整数缩放（如 125% DPI）下双线性会发糊，逐元素强制最近邻
+                RenderOptions.SetBitmapScalingMode(rect, BitmapScalingMode.NearestNeighbor);
                 Canvas.SetLeft(rect, x * C);
                 Canvas.SetTop(rect, y * C);
                 MapCanvas.Children.Add(rect);
@@ -380,6 +382,7 @@ public partial class MainWindow : Window
             Height = C,
             Fill = (Brush)FindResource(FacingBrushKey(_facing)),
         };
+        RenderOptions.SetBitmapScalingMode(_playerRect, BitmapScalingMode.NearestNeighbor);
         MapCanvas.Children.Add(_playerRect);
         Canvas.SetZIndex(_playerRect, 2);
         UpdatePlayerPosition();
