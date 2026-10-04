@@ -21,8 +21,11 @@ public partial class MainWindow : Window
 
     private readonly DispatcherTimer _battleMusicTimer;
 
-    /// <summary>逐回合战斗推进计时器（450ms/回合）</summary>
+    /// <summary>逐回合战斗推进计时器（自动战斗，260ms/回合，对标原版触怪即战节奏）</summary>
     private readonly DispatcherTimer _battleStepTimer;
+
+    /// <summary>战斗结果展示计时器（短暂展示胜负后自动结算关闭）</summary>
+    private readonly DispatcherTimer _battleResultTimer;
 
     /// <summary>战斗面板是否打开</summary>
     private bool _battlePanelOpen;
@@ -67,8 +70,14 @@ public partial class MainWindow : Window
         _engine.DoorOpened += OnDoorOpened;
         _engine.ItemPickedUp += OnItemPickedUp;
         _engine.FlyOrbTeleported += OnFlyOrbTeleported;
-        _battleStepTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(450) };
+        _battleStepTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(260) };
         _battleStepTimer.Tick += OnBattleStepTick;
+        _battleResultTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1150) };
+        _battleResultTimer.Tick += (_, _) =>
+        {
+            _battleResultTimer.Stop();
+            AutoFinishBattle();
+        };
         Loaded += OnLoaded;
     }
 
@@ -135,9 +144,9 @@ public partial class MainWindow : Window
         if (_bestiaryOpen) RefreshBestiary();
     }
 
-    // ---------- 逐回合战斗面板（GDD V1.0 §3.2） ----------
+    // ---------- 触怪即战：逐回合自动战斗（对标原版魔塔） ----------
 
-    /// <summary>根据引擎状态同步战斗面板开关/内容（由 StateChanged 驱动）。</summary>
+    /// <summary>根据引擎状态同步战斗面板开关/内容（由 StateChanged 驱动；战斗自动开打）。</summary>
     private void RefreshBattlePanel()
     {
         var b = _engine.ActiveBattle;
@@ -159,9 +168,9 @@ public partial class MainWindow : Window
         BattleOverlay.Visibility = Visibility.Visible;
 
         var m = b.Monster;
-        BattleSprite.Source = new BitmapImage(new Uri($"/Assets/Tiles/monster_classic_{Math.Clamp(m.SpriteIndex, 1, 6)}.png", UriKind.Relative));
+        BattleSprite.Source = LoadMonsterImage(m.TemplateId, m.SpriteIndex);
         BattleMonsterName.Text = m.Name;
-        BattleKindText.Text = b.IsBoss ? "BOSS · 禁止撤退 · 掉落红钥匙"
+        BattleKindText.Text = b.IsBoss ? "BOSS"
             : b.IsFixed ? "魔法怪 · 固定伤害 · 无视防御"
             : b.IsDrain ? "吸血怪 · 反击后回复生命"
             : "普通怪";
@@ -173,25 +182,12 @@ public partial class MainWindow : Window
         BattlePlayerAttack.Text = $"攻击 {_engine.Player.Attack}";
         BattlePlayerDefense.Text = $"防御 {_engine.Player.Defense}";
 
-        BattleWarning.Text = BattleWarningText(b);
         BattleLog.Text = "";
 
-        BattleFightBtn.IsEnabled = b.CanBreakDefense;
-        BattleRetreatBtn.IsEnabled = !b.IsBoss;
-        BattleActionPanel.Visibility = Visibility.Visible;
-        BattleResultPanel.Visibility = Visibility.Collapsed;
+        // 原版规则：触怪即战，无需确认，直接推进回合
+        _battleStepTimer.Start();
+        OnBattleStepTick(this, EventArgs.Empty);
         Focus();
-    }
-
-    /// <summary>战斗提示：破防失败警告 / 必死警告 / 预估战果。</summary>
-    private static string BattleWarningText(ActiveBattleState b)
-    {
-        if (!b.CanBreakDefense)
-            return $"⚠ 无法破防：你的攻击 ≤ 怪物防御 {b.Monster.Defense}，禁止开战！";
-        if (!b.Preview.IsVictory)
-            return $"⚠ 此战必死：预估损失 {b.Preview.PlayerDamageTaken} 生命 ≥ 当前生命 {b.PlayerHp}，确定要以命相搏吗？";
-        string extra = b.Preview.MonsterHealed > 0 ? $"（怪回复 {b.Preview.MonsterHealed}）" : "";
-        return $"预估损失 {b.Preview.PlayerDamageTaken} 生命，约 {b.Preview.Turns} 回合取胜{extra}。";
     }
 
     /// <summary>刷新战斗中双方实时 HP 与最近战报。</summary>
@@ -200,18 +196,6 @@ public partial class MainWindow : Window
         BattlePlayerHp.Text = $"HP：{b.PlayerHp}";
         BattleMonsterHp.Text = $"HP：{Math.Max(0, b.MonsterHp)}";
         BattleLog.Text = string.Join("\n", b.Steps.TakeLast(6).Select(s => s.Text));
-    }
-
-    /// <summary>玩家点击「战斗」：确认开战并立即推进第一回合。</summary>
-    private void OnBattleFightClick(object sender, RoutedEventArgs e)
-    {
-        if (_engine.ActiveBattle is not { } b || b.Ended) return;
-        _engine.ConfirmBattle();
-        if (_engine.ActiveBattle == null) return; // 破防失败已取消战斗
-        BattleActionPanel.Visibility = Visibility.Collapsed;
-        _battleStepTimer.Start();
-        OnBattleStepTick(this, EventArgs.Empty);
-        Focus();
     }
 
     private void OnBattleStepTick(object? sender, EventArgs e)
@@ -230,7 +214,7 @@ public partial class MainWindow : Window
         }
     }
 
-    /// <summary>战斗结束：显示胜利/阵亡结果面板（点击「继续」后才调用引擎结算）。</summary>
+    /// <summary>战斗结束：短暂展示胜利/阵亡结果后自动结算（原版无确认步骤）。</summary>
     private void HandleBattleEnd(ActiveBattleState b)
     {
         _battleResultHandled = true; // 防止 StateChanged / BattleEnded 关闭面板
@@ -250,12 +234,12 @@ public partial class MainWindow : Window
 
         _battleMusicTimer.Stop();
         _battleMusicTimer.Start(); // 结果音效播放后切回探索 BGM
-        BattleActionPanel.Visibility = Visibility.Collapsed;
         BattleResultPanel.Visibility = Visibility.Visible;
+        _battleResultTimer.Start(); // 短暂展示后自动结算
     }
 
-    /// <summary>点击「继续」：执行战斗结算（奖励/阵亡/移动），并按需处理死亡/通关。</summary>
-    private void OnBattleResultOkClick(object sender, RoutedEventArgs e)
+    /// <summary>结果展示结束：执行战斗结算（奖励/阵亡/移动），并按需处理死亡/通关。</summary>
+    private void AutoFinishBattle()
     {
         _engine.FinishBattle(); // 结算奖励/阵亡/移动
         RefreshAll();
@@ -276,21 +260,14 @@ public partial class MainWindow : Window
         Focus();
     }
 
-    /// <summary>点击「撤退」：不扣血、无奖励、留在原地，立即关闭战斗面板。</summary>
-    private void OnBattleRetreatClick(object sender, RoutedEventArgs e)
-    {
-        _battleMusicTimer.Stop();
-        _audio.PlayExplore();
-        _engine.RetreatBattle(); // 触发 BattleEnded → 关闭面板
-        Focus();
-    }
-
     private void CloseBattlePanel()
     {
         _battleStepTimer.Stop();
+        _battleResultTimer.Stop();
         _battlePanelOpen = false;
         _battleResultHandled = false;
         BattleOverlay.Visibility = Visibility.Collapsed;
+        BattleResultPanel.Visibility = Visibility.Collapsed;
     }
 
     private void RefreshAll()
@@ -346,8 +323,7 @@ public partial class MainWindow : Window
                     case TileType.Monster:
                     {
                         var m = floor.MonstersOnFloor.FirstOrDefault(mm => mm.Id == tile.TargetId);
-                        int sprite = Math.Clamp(m?.SpriteIndex ?? 1, 1, 6);
-                        fill = (Brush)FindResource($"MonsterClassic{sprite}Brush");
+                        fill = MonsterBrush(m);
                         if (m != null)
                         {
                             tooltip = $"{m.Name}  HP:{m.Hp} 攻:{m.Attack} 防:{m.Defense} 金币:{m.GoldReward}";
@@ -358,17 +334,7 @@ public partial class MainWindow : Window
                     case TileType.Item:
                     {
                         var it = floor.ItemsOnFloor.FirstOrDefault(ii => ii.Id == tile.TargetId);
-                        string itemKey = it?.Type switch
-                        {
-                            ItemType.Attack => "ItemAttackBrush",
-                            ItemType.Defense => "ItemDefenseBrush",
-                            ItemType.Key when it.KeyType == KeyType.Red => "ItemKeyRedBrush",
-                            ItemType.Key when it.KeyType == KeyType.Blue => "ItemKeyBlueBrush",
-                            ItemType.Key when it.KeyType == KeyType.Yellow => "ItemKeyYellowBrush",
-                            ItemType.FlyOrb => "ItemFlyOrbBrush",
-                            _ => "ItemHpBrush",
-                        };
-                        fill = (Brush)FindResource(itemKey);
+                        fill = ItemBrush(it);
                         if (it != null) tooltip = $"{it.Name}  {it.Desc}";
                         break;
                     }
@@ -429,6 +395,47 @@ public partial class MainWindow : Window
         double py = _engine.Player.PosY * C;
         Canvas.SetLeft(_playerRect, px);
         Canvas.SetTop(_playerRect, py);
+    }
+
+    // ---------- 素材映射：每只怪物 / 每种道具独立贴图，缺失时回退经典素材 ----------
+
+    /// <summary>怪物格贴图：优先 monster_{TemplateId}.png（原版风格），回退 monster_classic_{1~6}。</summary>
+    private Brush MonsterBrush(Monster? m)
+    {
+        int fallback = Math.Clamp(m?.SpriteIndex ?? 1, 1, 6);
+        if (m != null && TryFindResource($"Monster{m.TemplateId}Brush") is Brush b) return b;
+        return (Brush)FindResource($"MonsterClassic{fallback}Brush");
+    }
+
+    /// <summary>道具格贴图：优先 item_{TemplateId}.png（原版风格），回退按类型选取。</summary>
+    private Brush ItemBrush(Item? it)
+    {
+        if (it != null && TryFindResource($"Item{it.TemplateId}Brush") is Brush b) return b;
+        string itemKey = it?.Type switch
+        {
+            ItemType.Attack => "ItemAttackBrush",
+            ItemType.Defense => "ItemDefenseBrush",
+            ItemType.Key when it.KeyType == KeyType.Red => "ItemKeyRedBrush",
+            ItemType.Key when it.KeyType == KeyType.Blue => "ItemKeyBlueBrush",
+            ItemType.Key when it.KeyType == KeyType.Yellow => "ItemKeyYellowBrush",
+            ItemType.FlyOrb => "ItemFlyOrbBrush",
+            _ => "ItemHpBrush",
+        };
+        return (Brush)FindResource(itemKey);
+    }
+
+    /// <summary>战斗面板怪物立绘：优先 monster_{TemplateId}.png，回退经典贴图。</summary>
+    private static BitmapImage LoadMonsterImage(int templateId, int spriteIndex)
+    {
+        string path = $"/Assets/Tiles/monster_{templateId}.png";
+        try
+        {
+            return new BitmapImage(new Uri(path, UriKind.Relative));
+        }
+        catch
+        {
+            return new BitmapImage(new Uri($"/Assets/Tiles/monster_classic_{Math.Clamp(spriteIndex, 1, 6)}.png", UriKind.Relative));
+        }
     }
 
     /// <summary>守门条件的可读描述（用于地图 Tooltip）</summary>
@@ -705,15 +712,16 @@ public partial class MainWindow : Window
             int damage = MathHelper.EstimatedPlayerDamage(t, p);
             bool canKill = MathHelper.CanKill(t, p);
             var color = canKill ? Color.FromRgb(0x2E, 0x7D, 0x32) : Color.FromRgb(0xC6, 0x3B, 0x3B);
+            string sprite = t.Type == MonsterType.Boss || t.IsBoss ? "BOSS" : t.IgnoreDefense ? "魔法·无视防御" : "";
             return new BestiaryEntry
             {
-                SpritePath = $"/Assets/Tiles/monster_classic_{Math.Clamp(t.SpriteIndex, 1, 6)}.png",
+                SpritePath = $"/Assets/Tiles/monster_{t.Id}.png",
                 Name = t.Name,
                 Hp = t.Hp,
                 Attack = t.Attack,
                 Defense = t.Defense,
                 Gold = t.GoldReward,
-                KindText = t.IgnoreDefense ? "魔法·无视防御" : "",
+                KindText = sprite,
                 DamageText = $"预估损失 {damage}",
                 CanKillText = canKill ? "✓ 可战胜" : "✗ 暂不可战胜",
                 CanKillBrush = new SolidColorBrush(color),

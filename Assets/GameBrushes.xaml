@@ -12,15 +12,75 @@
     <ImageBrush x:Key="DoorBlueBrush" ImageSource="/Assets/Tiles/door_blue.png" Stretch="Fill" />
     <ImageBrush x:Key="DoorYellowBrush" ImageSource="/Assets/Tiles/door_yellow.png" Stretch="Fill" />
 
-    <!-- ======== 怪物（经典换皮：1~6 号贴图，按 SpriteIndex 选取） ======== -->
+    <!-- ======== 怪物（原版风格：每只怪物独立贴图 monster_{id}，按模板 ID 选取） ======== -->
     <ImageBrush x:Key="MonsterClassic1Brush" ImageSource="/Assets/Tiles/monster_classic_1.png" Stretch="Fill" />
     <ImageBrush x:Key="MonsterClassic2Brush" ImageSource="/Assets/Tiles/monster_classic_2.png" Stretch="Fill" />
     <ImageBrush x:Key="MonsterClassic3Brush" ImageSource="/Assets/Tiles/monster_classic_3.png" Stretch="Fill" />
     <ImageBrush x:Key="MonsterClassic4Brush" ImageSource="/Assets/Tiles/monster_classic_4.png" Stretch="Fill" />
     <ImageBrush x:Key="MonsterClassic5Brush" ImageSource="/Assets/Tiles/monster_classic_5.png" Stretch="Fill" />
     <ImageBrush x:Key="MonsterClassic6Brush" ImageSource="/Assets/Tiles/monster_classic_6.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster1Brush" ImageSource="/Assets/Tiles/monster_1.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster2Brush" ImageSource="/Assets/Tiles/monster_2.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster3Brush" ImageSource="/Assets/Tiles/monster_3.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster4Brush" ImageSource="/Assets/Tiles/monster_4.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster5Brush" ImageSource="/Assets/Tiles/monster_5.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster6Brush" ImageSource="/Assets/Tiles/monster_6.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster7Brush" ImageSource="/Assets/Tiles/monster_7.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster8Brush" ImageSource="/Assets/Tiles/monster_8.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster9Brush" ImageSource="/Assets/Tiles/monster_9.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster10Brush" ImageSource="/Assets/Tiles/monster_10.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster11Brush" ImageSource="/Assets/Tiles/monster_11.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster12Brush" ImageSource="/Assets/Tiles/monster_12.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster13Brush" ImageSource="/Assets/Tiles/monster_13.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster14Brush" ImageSource="/Assets/Tiles/monster_14.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster15Brush" ImageSource="/Assets/Tiles/monster_15.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster16Brush" ImageSource="/Assets/Tiles/monster_16.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster17Brush" ImageSource="/Assets/Tiles/monster_17.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster18Brush" ImageSource="/Assets/Tiles/monster_18.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster19Brush" ImageSource="/Assets/Tiles/monster_19.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster20Brush" ImageSource="/Assets/Tiles/monster_20.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster21Brush" ImageSource="/Assets/Tiles/monster_21.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster22Brush" ImageSource="/Assets/Tiles/monster_22.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster23Brush" ImageSource="/Assets/Tiles/monster_23.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster24Brush" ImageSource="/Assets/Tiles/monster_24.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster25Brush" ImageSource="/Assets/Tiles/monster_25.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster26Brush" ImageSource="/Assets/Tiles/monster_26.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster27Brush" ImageSource="/Assets/Tiles/monster_27.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster28Brush" ImageSource="/Assets/Tiles/monster_28.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster29Brush" ImageSource="/Assets/Tiles/monster_29.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster30Brush" ImageSource="/Assets/Tiles/monster_30.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster31Brush" ImageSource="/Assets/Tiles/monster_31.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster32Brush" ImageSource="/Assets/Tiles/monster_32.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster33Brush" ImageSource="/Assets/Tiles/monster_33.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster34Brush" ImageSource="/Assets/Tiles/monster_34.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster35Brush" ImageSource="/Assets/Tiles/monster_35.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster36Brush" ImageSource="/Assets/Tiles/monster_36.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster37Brush" ImageSource="/Assets/Tiles/monster_37.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster38Brush" ImageSource="/Assets/Tiles/monster_38.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster39Brush" ImageSource="/Assets/Tiles/monster_39.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster40Brush" ImageSource="/Assets/Tiles/monster_40.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster41Brush" ImageSource="/Assets/Tiles/monster_41.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster42Brush" ImageSource="/Assets/Tiles/monster_42.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster43Brush" ImageSource="/Assets/Tiles/monster_43.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster44Brush" ImageSource="/Assets/Tiles/monster_44.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster45Brush" ImageSource="/Assets/Tiles/monster_45.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster46Brush" ImageSource="/Assets/Tiles/monster_46.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster47Brush" ImageSource="/Assets/Tiles/monster_47.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster48Brush" ImageSource="/Assets/Tiles/monster_48.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster49Brush" ImageSource="/Assets/Tiles/monster_49.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster50Brush" ImageSource="/Assets/Tiles/monster_50.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster51Brush" ImageSource="/Assets/Tiles/monster_51.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster52Brush" ImageSource="/Assets/Tiles/monster_52.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster53Brush" ImageSource="/Assets/Tiles/monster_53.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster54Brush" ImageSource="/Assets/Tiles/monster_54.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster55Brush" ImageSource="/Assets/Tiles/monster_55.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster56Brush" ImageSource="/Assets/Tiles/monster_56.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster57Brush" ImageSource="/Assets/Tiles/monster_57.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster58Brush" ImageSource="/Assets/Tiles/monster_58.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster59Brush" ImageSource="/Assets/Tiles/monster_59.png" Stretch="Fill" />
+    <ImageBrush x:Key="Monster60Brush" ImageSource="/Assets/Tiles/monster_60.png" Stretch="Fill" />
 
-    <!-- ======== 道具 ======== -->
+    <!-- ======== 道具（原版风格：药水/宝石按道具模板 ID 选取 item_{id}；钥匙/飞行器复用经典素材） ======== -->
     <ImageBrush x:Key="ItemHpBrush" ImageSource="/Assets/Tiles/item_hp.png" Stretch="Fill" />
     <ImageBrush x:Key="ItemAttackBrush" ImageSource="/Assets/Tiles/item_attack.png" Stretch="Fill" />
     <ImageBrush x:Key="ItemDefenseBrush" ImageSource="/Assets/Tiles/item_defense.png" Stretch="Fill" />
@@ -28,6 +88,22 @@
     <ImageBrush x:Key="ItemKeyBlueBrush" ImageSource="/Assets/Tiles/key_blue.png" Stretch="Fill" />
     <ImageBrush x:Key="ItemKeyYellowBrush" ImageSource="/Assets/Tiles/key_yellow.png" Stretch="Fill" />
     <ImageBrush x:Key="ItemFlyOrbBrush" ImageSource="/Assets/Tiles/item_flyorb.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item1Brush" ImageSource="/Assets/Tiles/item_1.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item2Brush" ImageSource="/Assets/Tiles/item_2.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item3Brush" ImageSource="/Assets/Tiles/item_3.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item4Brush" ImageSource="/Assets/Tiles/item_4.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item5Brush" ImageSource="/Assets/Tiles/item_5.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item6Brush" ImageSource="/Assets/Tiles/item_6.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item7Brush" ImageSource="/Assets/Tiles/item_7.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item8Brush" ImageSource="/Assets/Tiles/item_8.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item9Brush" ImageSource="/Assets/Tiles/item_9.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item10Brush" ImageSource="/Assets/Tiles/item_10.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item11Brush" ImageSource="/Assets/Tiles/item_11.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item12Brush" ImageSource="/Assets/Tiles/item_12.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item13Brush" ImageSource="/Assets/Tiles/key_yellow.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item14Brush" ImageSource="/Assets/Tiles/key_blue.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item15Brush" ImageSource="/Assets/Tiles/key_red.png" Stretch="Fill" />
+    <ImageBrush x:Key="Item16Brush" ImageSource="/Assets/Tiles/item_flyorb.png" Stretch="Fill" />
 
     <!-- ======== 玩家（四方向） / NPC / 商店 ======== -->
     <ImageBrush x:Key="PlayerUpBrush" ImageSource="/Assets/Tiles/player_up.png" Stretch="Fill" />

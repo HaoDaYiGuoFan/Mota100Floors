@@ -13,7 +13,7 @@ public static class Program
 
     public static int Main()
     {
-        string dataDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\Mota100Floors\Data"));
+        string dataDir = FindGameDataDir();
         string floorsDir = Path.Combine(dataDir, "Floors");
         Directory.CreateDirectory(floorsDir);
 
@@ -21,20 +21,20 @@ public static class Program
 
         var monsters = MonsterTemplates.Build();
         var items = ItemTemplates.Build();
-        var shop = ItemTemplates.BuildShop();
+        var shops = ItemTemplates.BuildShops();
 
         // 模板文件
         File.WriteAllText(Path.Combine(dataDir, "Monsters.json"), JsonSerializer.Serialize(monsters, JsonOpts));
         File.WriteAllText(Path.Combine(dataDir, "Items.json"), JsonSerializer.Serialize(items, JsonOpts));
-        File.WriteAllText(Path.Combine(dataDir, "ShopConfig.json"), JsonSerializer.Serialize(shop, JsonOpts));
-        Console.WriteLine($"怪物模板 {monsters.Count} 种，道具模板 {items.Count} 种，商店商品 {shop.Items.Count} 种。");
+        File.WriteAllText(Path.Combine(dataDir, "ShopConfig.json"), JsonSerializer.Serialize(shops, JsonOpts));
+        Console.WriteLine($"怪物模板 {monsters.Count} 种，道具模板 {items.Count} 种，商店 {shops.Count} 档。");
 
         // 逐层生成
         int prevUpX = 1, prevUpY = 1;
         var stats = new Dictionary<int, (int Monsters, int Items, int Doors)>();
         for (int f = 1; f <= 100; f++)
         {
-            int tier = f <= 20 ? 0 : f <= 50 ? 1 : f <= 80 ? 2 : 3;
+            int tier = f <= 24 ? 0 : f <= 50 ? 1 : f <= 80 ? 2 : 3;
             var floor = FloorGenerator.Generate(f, tier, prevUpX, prevUpY, monsters, items);
             if (f == 1) FloorGenerator.ApplyFloor1Special(floor); // 1F 左下角飞行器
 
@@ -63,8 +63,28 @@ public static class Program
         Console.WriteLine(fail == 0
             ? "全部 100 层校验通过：entry→StairUp 连通、门钥匙均在近侧可达。"
             : $"有 {fail} 层校验未通过，请检查。");
+
+        // 通关平衡性模拟（原版数值曲线 × 100 层体量）
+        int balance = BalanceSimulator.Run(floorsDir, monsters, shops);
+
         Console.WriteLine("完成。");
-        return 0;
+        return balance;
+    }
+
+    /// <summary>
+    /// 定位主项目的 Data 目录：从生成器输出目录逐级向上找到包含 Mota100Floors.csproj 的项目根。
+    /// （原先硬编码相对层级会解析到 嵌套的 Mota100Floors\Mota100Floors\Data，数据从未真正落到游戏目录。）
+    /// </summary>
+    private static string FindGameDataDir()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir != null && !File.Exists(Path.Combine(dir.FullName, "Mota100Floors.csproj")))
+            dir = dir.Parent;
+
+        if (dir == null)
+            throw new InvalidOperationException("未找到 Mota100Floors.csproj，无法定位 Data 输出目录。");
+
+        return Path.Combine(dir.FullName, "Data");
     }
 
     private static (int, int)? FindTile(FloorJson floor, char ch)

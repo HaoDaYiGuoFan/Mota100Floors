@@ -1,59 +1,238 @@
-{
-  "ShopId": 1,
-  "Items": [
-    {
-      "Id": 1,
-      "Name": "\u751F\u547D \u002B300",
-      "Desc": "\u7ACB\u5373\u6062\u590D 300 \u70B9\u751F\u547D\uFF08\u53D7\u4E0A\u9650\u7EA6\u675F\uFF09",
-      "Type": "Hp",
-      "KeyType": "Yellow",
-      "Value": 300,
-      "Price": 200
-    },
-    {
-      "Id": 2,
-      "Name": "\u653B\u51FB \u002B10",
-      "Desc": "\u6C38\u4E45\u589E\u52A0 10 \u70B9\u653B\u51FB",
-      "Type": "Attack",
-      "KeyType": "Yellow",
-      "Value": 10,
-      "Price": 400
-    },
-    {
-      "Id": 3,
-      "Name": "\u9632\u5FA1 \u002B10",
-      "Desc": "\u6C38\u4E45\u589E\u52A0 10 \u70B9\u9632\u5FA1",
-      "Type": "Defense",
-      "KeyType": "Yellow",
-      "Value": 10,
-      "Price": 400
-    },
-    {
-      "Id": 4,
-      "Name": "\u9EC4\u94A5\u5319 \u002B1",
-      "Desc": "\u83B7\u5F97 1 \u628A\u9EC4\u94A5\u5319",
-      "Type": "Key",
-      "KeyType": "Yellow",
-      "Value": 1,
-      "Price": 50
-    },
-    {
-      "Id": 5,
-      "Name": "\u84DD\u94A5\u5319 \u002B1",
-      "Desc": "\u83B7\u5F97 1 \u628A\u84DD\u94A5\u5319",
-      "Type": "Key",
-      "KeyType": "Blue",
-      "Value": 1,
-      "Price": 100
-    },
-    {
-      "Id": 6,
-      "Name": "\u7EA2\u94A5\u5319 \u002B1",
-      "Desc": "\u83B7\u5F97 1 \u628A\u7EA2\u94A5\u5319",
-      "Type": "Key",
-      "KeyType": "Red",
-      "Value": 1,
-      "Price": 200
-    }
-  ]
-}
+[
+  {
+    "ShopId": 1,
+    "Items": [
+      {
+        "Id": 1,
+        "Name": "\u751F\u547D \u002B200",
+        "Desc": "\u7ACB\u5373\u6062\u590D 200 \u70B9\u751F\u547D",
+        "Type": "Hp",
+        "KeyType": "Yellow",
+        "Value": 200,
+        "Price": 30
+      },
+      {
+        "Id": 2,
+        "Name": "\u653B\u51FB \u002B2",
+        "Desc": "\u6C38\u4E45\u589E\u52A0 2 \u70B9\u653B\u51FB",
+        "Type": "Attack",
+        "KeyType": "Yellow",
+        "Value": 2,
+        "Price": 50
+      },
+      {
+        "Id": 3,
+        "Name": "\u9632\u5FA1 \u002B2",
+        "Desc": "\u6C38\u4E45\u589E\u52A0 2 \u70B9\u9632\u5FA1",
+        "Type": "Defense",
+        "KeyType": "Yellow",
+        "Value": 2,
+        "Price": 60
+      },
+      {
+        "Id": 4,
+        "Name": "\u9EC4\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u9EC4\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Yellow",
+        "Value": 1,
+        "Price": 25
+      },
+      {
+        "Id": 5,
+        "Name": "\u84DD\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u84DD\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Blue",
+        "Value": 1,
+        "Price": 80
+      },
+      {
+        "Id": 6,
+        "Name": "\u7EA2\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u7EA2\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Red",
+        "Value": 1,
+        "Price": 160
+      }
+    ]
+  },
+  {
+    "ShopId": 2,
+    "Items": [
+      {
+        "Id": 1,
+        "Name": "\u751F\u547D \u002B500",
+        "Desc": "\u7ACB\u5373\u6062\u590D 500 \u70B9\u751F\u547D",
+        "Type": "Hp",
+        "KeyType": "Yellow",
+        "Value": 500,
+        "Price": 80
+      },
+      {
+        "Id": 2,
+        "Name": "\u653B\u51FB \u002B4",
+        "Desc": "\u6C38\u4E45\u589E\u52A0 4 \u70B9\u653B\u51FB",
+        "Type": "Attack",
+        "KeyType": "Yellow",
+        "Value": 4,
+        "Price": 250
+      },
+      {
+        "Id": 3,
+        "Name": "\u9632\u5FA1 \u002B3",
+        "Desc": "\u6C38\u4E45\u589E\u52A0 3 \u70B9\u9632\u5FA1",
+        "Type": "Defense",
+        "KeyType": "Yellow",
+        "Value": 3,
+        "Price": 300
+      },
+      {
+        "Id": 4,
+        "Name": "\u9EC4\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u9EC4\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Yellow",
+        "Value": 1,
+        "Price": 60
+      },
+      {
+        "Id": 5,
+        "Name": "\u84DD\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u84DD\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Blue",
+        "Value": 1,
+        "Price": 180
+      },
+      {
+        "Id": 6,
+        "Name": "\u7EA2\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u7EA2\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Red",
+        "Value": 1,
+        "Price": 360
+      }
+    ]
+  },
+  {
+    "ShopId": 3,
+    "Items": [
+      {
+        "Id": 1,
+        "Name": "\u751F\u547D \u002B2000",
+        "Desc": "\u7ACB\u5373\u6062\u590D 2000 \u70B9\u751F\u547D",
+        "Type": "Hp",
+        "KeyType": "Yellow",
+        "Value": 2000,
+        "Price": 300
+      },
+      {
+        "Id": 2,
+        "Name": "\u653B\u51FB \u002B7",
+        "Desc": "\u6C38\u4E45\u589E\u52A0 7 \u70B9\u653B\u51FB",
+        "Type": "Attack",
+        "KeyType": "Yellow",
+        "Value": 7,
+        "Price": 900
+      },
+      {
+        "Id": 3,
+        "Name": "\u9632\u5FA1 \u002B5",
+        "Desc": "\u6C38\u4E45\u589E\u52A0 5 \u70B9\u9632\u5FA1",
+        "Type": "Defense",
+        "KeyType": "Yellow",
+        "Value": 5,
+        "Price": 1100
+      },
+      {
+        "Id": 4,
+        "Name": "\u9EC4\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u9EC4\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Yellow",
+        "Value": 1,
+        "Price": 250
+      },
+      {
+        "Id": 5,
+        "Name": "\u84DD\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u84DD\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Blue",
+        "Value": 1,
+        "Price": 700
+      },
+      {
+        "Id": 6,
+        "Name": "\u7EA2\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u7EA2\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Red",
+        "Value": 1,
+        "Price": 1400
+      }
+    ]
+  },
+  {
+    "ShopId": 4,
+    "Items": [
+      {
+        "Id": 1,
+        "Name": "\u751F\u547D \u002B8000",
+        "Desc": "\u7ACB\u5373\u6062\u590D 8000 \u70B9\u751F\u547D",
+        "Type": "Hp",
+        "KeyType": "Yellow",
+        "Value": 8000,
+        "Price": 1200
+      },
+      {
+        "Id": 2,
+        "Name": "\u653B\u51FB \u002B16",
+        "Desc": "\u6C38\u4E45\u589E\u52A0 16 \u70B9\u653B\u51FB",
+        "Type": "Attack",
+        "KeyType": "Yellow",
+        "Value": 16,
+        "Price": 3200
+      },
+      {
+        "Id": 3,
+        "Name": "\u9632\u5FA1 \u002B8",
+        "Desc": "\u6C38\u4E45\u589E\u52A0 8 \u70B9\u9632\u5FA1",
+        "Type": "Defense",
+        "KeyType": "Yellow",
+        "Value": 8,
+        "Price": 4000
+      },
+      {
+        "Id": 4,
+        "Name": "\u9EC4\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u9EC4\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Yellow",
+        "Value": 1,
+        "Price": 900
+      },
+      {
+        "Id": 5,
+        "Name": "\u84DD\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u84DD\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Blue",
+        "Value": 1,
+        "Price": 2600
+      },
+      {
+        "Id": 6,
+        "Name": "\u7EA2\u94A5\u5319 \u002B1",
+        "Desc": "\u83B7\u5F97 1 \u628A\u7EA2\u94A5\u5319",
+        "Type": "Key",
+        "KeyType": "Red",
+        "Value": 1,
+        "Price": 5200
+      }
+    ]
+  }
+]

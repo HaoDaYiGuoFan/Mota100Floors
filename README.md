@@ -37,20 +37,30 @@
 
 ---
 
+## 🆕 V1.1 · 对标原版魔塔重制
+
+- 🎵 **BGM 全面换血**：探索 / 战斗双 BGM 由阴沉小调改为欢快大调（C 大调 112 BPM ／ A 大调 150 BPM），8-bit 风格无缝循环。
+- 👾 **怪物全面对标原版**：60 种怪物换用原版魔塔体系与数值（1~23 号 = 原版 24 层经典版怪物手册原值），每只怪物独立原版风格像素贴图。
+- ⚔️ **打怪玩法对齐原版**：触怪即战（取消战斗 / 撤退确认面板，逐回合动画自动推进），法师系无视防御，破防不足视作撞墙。
+- 🧪 **数值经济重制**：玩家 500 / 10 / 10 起步（按前几层怪物战损校准）、红蓝宝石 +2 起步、药水与分层商店（4 档定价）对齐原版节奏；生成器新增通关平衡模拟器。
+- 🛠 **修复**：地图生成器输出路径错位（数据此前未真正写入游戏 `Data/` 目录）的问题。
+
+---
+
 ## ✨ 功能特性
 
 - **100 层地牢**：18 × 11 网格、48 px 瓦片；上楼 / 下楼 / 三色钥匙门 / 回廊互通，可绕路变强后再战。
-- **经典素材换皮**：原版魔塔素材重绘为 `monster_classic_1~6` 六套怪物贴图、门 / 钥匙 / 楼梯 / 商店 / NPC / 药水 / 力量与守护宝石，全部内嵌为 WPF `Resource`。
+- **完全对标原版魔塔（V1.1 数值重制）**：60 种怪物全面换用原版体系——1~23 号（绿 / 红 / 黑史莱姆、小 / 大 / 红蝙蝠、骷髅人 / 士兵 / 队长、初级 / 高级 / 麻衣法师、初级 / 中级 / 高级卫兵、兽人、兽人武士、石头人、大乌鸦、白衣武士、双手剑士、僵尸）数值原样取自原版 24 层经典版怪物手册，25~60 号按原版成长曲线外推；每 10 层一座原版风格里程碑 BOSS（骷髅将军 → 冥灵魔王）。
+- **原版风格像素贴图**：每只怪物 / 每种道具独立贴图（`monster_1~60.png`、`item_1~12.png`，16×16 像素画 ×3 放大），由 `Assets/generate_monster_sprites.ps1` 程序化生成，预览见 [docs/sprites-preview.png](docs/sprites-preview.png)；门 / 钥匙 / 楼梯 / 商店 / NPC / 玩家沿用经典素材，全部内嵌为 WPF `Resource`。
 - **四方向玩家精灵**：`player_up / down / left / right` 按移动方向实时切换贴图，撞墙不转向。
-- **逐回合战斗（GDD V1.0）**：走上怪物格弹出战斗面板——先展示怪物卡 / 勇士卡与预估战果，选择「⚔ 战斗 / 撤退」；确认后逐回合推进（玩家先手 → 怪物反击 → 吸血回复），450 ms/回合实时刷新 HP 与战报日志。预估与真实结算共用同一公式（`MathHelper`）。
-- **破防门槛**：玩家攻击 ≤ 怪物防御时禁止开战；预估必死时给出红色预警，仍可选择以命相搏。
-- **4 类怪物**：`Normal` 普通 ／ `FixedDamage` 魔法·固定伤害（无视防御）／ `DrainBlood` 吸血 ／ `Boss`（禁止撤退、胜利掉落红钥匙，100 层 BOSS 击破即通关）。
-- **怪物手册（`B` 键）**：41 种怪物的生命 / 攻击 / 防御 / 金币 / 贴图 / 类型，实时计算预估损失与「✓ / ✗ 可战胜」。
-- **音效与音乐**：拾取、飞行器拾取 / 启动 / 落地、移动、开门、战斗命中、胜利、阵亡共 8 类音效；探索 / 战斗双 BGM；`M` 键静音；全部由 `generate_audio.ps1` 程序化合成。
+- **触怪即战（对标原版）**：走上怪物格立即开战，逐回合动画推进（玩家先手 → 怪物反击 → 吸血回复），260 ms/回合实时刷新 HP 与战报日志，结束自动结算；无法破防的怪物视作撞墙，杜绝无谓送死。
+- **原版伤害公式**：玩家单次伤害 = max(1, 玩家ATK − 怪物DEF)，魔法系怪物无视防御；预估与真实结算共用同一公式（`MathHelper`）。
+- **怪物手册（`B` 键）**：60 种怪物的生命 / 攻击 / 防御 / 金币 / 贴图 / 类型，实时计算预估损失与「✓ / ✗ 可战胜」。
+- **音效与音乐**：拾取、飞行器拾取 / 启动 / 落地、移动、开门、战斗命中、胜利、阵亡共 8 类音效；欢快向探索 / 战斗双 BGM（C 大调 112 BPM ／ A 大调 150 BPM，8-bit 风格无缝循环）；`M` 键静音；全部由 `generate_audio.ps1` 程序化合成。
 - **存档系统**：`F5` 存档、`F9` 读档（`%LOCALAPPDATA%\Mota100Floors\save.json`，临时文件 + 原子覆盖）。
-- **经典魔塔系统**：15 座商店（金币购血 / 攻 / 防 / 钥匙）、NPC 任务（5 项）、6 处守门属性门槛、Boss 战与 100 层通关判定。
+- **经典魔塔系统**：分层商店（按楼层段位 4 档定价，金币购血 / 攻 / 防 / 钥匙）、NPC 任务（5 项）、6 处守门属性门槛、每 10 层 BOSS 掉落红钥匙、100 层击破冥灵魔王通关。
 - **飞行器（楼层穿梭机）**：1F 左下角永久道具；`I` 键打开背包，站在楼梯格上使用打开穿梭面板，传送到任意已到达楼层（未探索置灰）。
-- **数值与图标**：初始生命 100 / 攻击 10 / 防御 10；金色塔标应用图标由 `generate_icon.ps1` 程序化生成（exe + 窗口双用）。
+- **原版数值经济**：初始生命 500 / 攻击 10 / 防御 10 / 黄钥匙 ×1（初始生命按最优顺序全清第 1 层损血 ≈58% 校准），红 / 蓝宝石 +2 起步、红药水 +100，生命无上限；生成器内置**通关模拟器**自动校验 100 层曲线「可破防、无战损断链」。
 
 ---
 
@@ -94,7 +104,7 @@ dotnet publish -c Release -r win-x64 --self-contained true `
 | `F9` | 读档 |
 | `M` | 音乐与音效静音开关 |
 
-走上道具格自动拾取；走上怪物格弹出战斗面板（BOSS 战强制开战）；上楼 / 下楼为地图元素，站上即传送。战斗中全局按键锁定，直至点击「继续」完成结算。
+走上道具格自动拾取；走上怪物格立即开战（触怪即战，逐回合自动战斗，无法破防的怪物视作撞墙）；上楼 / 下楼为地图元素，站上即传送。战斗中全局按键锁定，直至战斗结算完成。
 
 ## 🗂 目录结构
 
@@ -105,30 +115,31 @@ Mota100Floors/
 ├─ Assets/
 │  ├─ GameBrushes.xaml                      # 全局画刷
 │  ├─ Audio/                                # 双 BGM + 8 类音效（generate_audio.ps1 合成）
-│  ├─ Tiles/                                # 瓦片与经典素材 PNG
+│  ├─ Tiles/                                # 瓦片经典素材 + 60 怪物 / 12 道具原版风格贴图（generate_monster_sprites.ps1 生成）
 │  ├─ icon.ico / generate_icon.ps1          # 程序化生成的应用图标
 │  └─ import_classic_assets.ps1             # 经典素材批量导入
 ├─ Data/
-│  ├─ Monsters.json                         # 41 个怪物模板
+│  ├─ Monsters.json                         # 60 个怪物模板（原版数值体系）
 │  ├─ Items.json / Quests.json / ShopConfig.json
 │  └─ Floors/Floor1..100.json               # 每层地图与放置数据
 ├─ Helpers/  MapConstants / MathHelper / TileCollisionHelper
 ├─ Models/   Monster / Player / Item / MapTile / FloorData / Quest / ...
 ├─ Services/ GameData / GameEngine / AudioManager / SaveSystem
-├─ MotaMapGenerator/                        # 独立数据生成与校验工具
+├─ MotaMapGenerator/                        # 独立数据生成 + 连通性校验 + 通关平衡模拟
 ├─ docs/                                    # GDD 设计文档
 └─ release/                                 # 发布产物（zip + 校验和 + 版本说明）
 ```
 
 ## 🧊 内容与数据
 
-- **怪物模板**（`Data/Monsters.json`）：41 个模板，`SpriteIndex = 1~6` 对应 `monster_classic_1~6` 贴图动态映射；`IgnoreDefense` 法师模板在战斗与手册中均无视玩家防御。
-- **楼层数据**（`Data/Floors/`）：由 `MotaMapGenerator` 生成与校验（独立控制台项目，主项目通过 `DefaultItemExcludes` 排除编译）。修改后运行：`dotnet run --project MotaMapGenerator`。
+- **怪物模板**（`Data/Monsters.json`）：60 个模板，1~23 号为原版 24 层经典版数值，24~50 号为原版曲线外推，51~60 号为里程碑 BOSS；`SpriteIndex` 对应 `monster_{id}.png` 独立贴图，`IgnoreDefense` 法师系在战斗与手册中均无视玩家防御。
+- **楼层数据**（`Data/Floors/`）：由 `MotaMapGenerator` 生成、校验连通性并运行通关平衡模拟（独立控制台项目，主项目通过 `DefaultItemExcludes` 排除编译）。修改后运行：`dotnet run --project MotaMapGenerator`（输出目录自动定位主项目 `Data/`）。
 
 ## 🔗 设计文档
 
 - 总览：[docs/index.html](docs/index.html)（story / interaction / combat / content 子页）
 - Markdown：[GDD V1.0 怪物与逐回合战斗系统](docs/GDD.md) · [怪物系统实现规格](docs/monster-system-spec.md) · [飞行器（楼层穿梭机）任务文档](docs/MT-TASK-ITEM-FlyOrb.md)
+- 贴图预览：[docs/sprites-preview.png](docs/sprites-preview.png)（60 怪物 + 12 道具，`Assets/generate_monster_sprites.ps1` 可重新生成）
 
 ## ⚠️ 资源说明
 

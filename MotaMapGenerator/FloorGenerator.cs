@@ -170,8 +170,11 @@ public static class FloorGenerator
         var chainSet = chainCorridors.SelectMany(s => s).ToHashSet();
         freeCells.RemoveAll(chainSet.Contains);
 
-        var tierMonsters = monsters.Where(m => m.Tier == tier && !m.IsBoss).ToList();
-        var lowerMonsters = monsters.Where(m => m.Tier == Math.Max(0, tier - 1) && !m.IsBoss).ToList();
+        // 怪物池：按原版逐层进度（MinFloor/MaxFloor）筛选，不看 tier 档
+        var pool = monsters.Where(m => !m.IsBoss && m.MinFloor <= floorNumber && floorNumber <= m.MaxFloor).ToList();
+        if (pool.Count == 0)
+            pool = monsters.Where(m => !m.IsBoss && m.MinFloor <= floorNumber).ToList();
+
         var distOrder = freeCells
             .Select(c => (Cell: c, Dist: BfsDist(g, entryX, entryY, c.Item1, c.Item2)))
             .Where(t => t.Dist >= 0)
@@ -184,9 +187,7 @@ public static class FloorGenerator
         {
             var cell = distOrder[i].Cell;
             if (usedCells.Contains(cell)) continue;
-            var tpl = i < monsterCount / 3 && lowerMonsters.Count > 0
-                ? lowerMonsters[Rng.Next(lowerMonsters.Count)]
-                : tierMonsters[Rng.Next(tierMonsters.Count)];
+            var tpl = PickMonster(floorNumber, pool);
             usedCells.Add(cell);
             monstersOnFloor.Add(new MonsterJson
             {
@@ -205,11 +206,18 @@ public static class FloorGenerator
             });
         }
 
-        // 100 层最终 BOSS
-        if (floorNumber == 100)
+        // ---- 6.5 里程碑 BOSS（每 10 层一座，镇守上楼楼梯旁，对标原版 BOSS 拦路） ----
+        if (floorNumber % 10 == 0)
         {
-            var bossTpl = monsters.First(m => m.IsBoss);
-            var far = FarthestFreeCell(g, entryX, entryY);
+            var bossTpl = monsters.First(m => m.IsBoss && m.MinFloor == floorNumber)
+                ?? monsters.First(m => m.IsBoss);
+            // 优先放在上楼楼梯旁的自由格（原版 BOSS 拦路感），找不到则放最远格
+            var guardCell = Dirs
+                .Select(d => (upX + d.Item1, upY + d.Item2))
+                .Where(c => !OutOfBounds(c) && g[c.Item1, c.Item2] == '.' && !usedCells.Contains(c) && c != (entryX, entryY))
+                .FirstOrDefault();
+            bool adjacent = !OutOfBounds(guardCell) && g[guardCell.Item1, guardCell.Item2] == '.' && !usedCells.Contains(guardCell);
+            var bossCell = adjacent ? guardCell : FarthestFreeCell(g, entryX, entryY);
             monstersOnFloor.Add(new MonsterJson
             {
                 Id = 999,
@@ -219,13 +227,13 @@ public static class FloorGenerator
                 Attack = bossTpl.Attack,
                 Defense = bossTpl.Defense,
                 GoldReward = bossTpl.GoldReward,
-                X = far.Item1,
-                Y = far.Item2,
+                X = bossCell.Item1,
+                Y = bossCell.Item2,
                 IsAlive = true,
                 IsBoss = true,
                 Tier = 3,
             });
-            usedCells.Add(far);
+            usedCells.Add(bossCell);
         }
 
 
@@ -233,14 +241,14 @@ public static class FloorGenerator
         var itemsOnFloor = new List<ItemJson>();
         var allFree = FreeCells(g).Where(c => !usedCells.Contains(c)).ToList();
         var hpTpl = PickHpTemplate(items, tier);
-        int hpCount = Rng.Next(1, 3);
+        int hpCount = Rng.Next(2, 4); // 原版每层 2~3 瓶药水
         for (int i = 0; i < hpCount && allFree.Count > 0; i++)
         {
             var cell = PopRandom(allFree);
             usedCells.Add(cell);
             itemsOnFloor.Add(MakeItem(itemsOnFloor.Count + 1, hpTpl, cell));
         }
-        // 攻防宝石
+        // 攻防宝石（原版每层红/蓝宝石各 1~2 颗）
         foreach (var type in new[] { "Attack", "Defense" })
         {
             int count = Rng.Next(1, 3);
@@ -301,7 +309,7 @@ public static class FloorGenerator
                     Y = cell.Item2,
                     Name = "旅行商人",
                     Text = "欢迎光临！金币可以购买生命、攻击、防御与钥匙。",
-                    ShopId = 1,
+                    ShopId = tier + 1, // 商店按楼层段位定价：1~4 档
                 });
             }
         }
@@ -550,28 +558,31 @@ public static class FloorGenerator
         return v;
     }
 
+    /// <summary>
+    /// 挑选本层怪物：60% 概率取近 12 层内新登场的怪物（贴近原版「新怪首见」的递进感），否则整池随机；
+    /// 法师系（固定伤害、无视防御）占比压到约 1/4，避免高段层战损失控。
+    /// </summary>
+    private static MonsterTemplate PickMonster(int floorNumber, List<MonsterTemplate> pool)
+    {
+        var recent = pool.Where(m => m.MinFloor >= floorNumber - 12).ToList();
+        var source = Rng.NextDouble() < 0.6 && recent.Count > 0 ? recent : pool;
+
+        var nonMagic = source.Where(m => !m.IgnoreDefense).ToList();
+        if (nonMagic.Count > 0 && Rng.NextDouble() > 0.25)
+            return nonMagic[Rng.Next(nonMagic.Count)];
+        return source[Rng.Next(source.Count)];
+    }
+
     private static ItemTemplate PickHpTemplate(List<ItemTemplate> items, int tier)
     {
         var hp = items.Where(t => t.Type == "Hp").ToList();
-        return tier switch
-        {
-            0 => hp[0],
-            1 => Rng.NextDouble() < 0.7 ? hp[1] : hp[0],
-            2 => Rng.NextDouble() < 0.7 ? hp[2] : hp[1],
-            _ => hp[2],
-        };
+        return hp[Math.Min(tier, hp.Count - 1)];
     }
 
     private static ItemTemplate PickStatTemplate(List<ItemTemplate> items, string type, int tier)
     {
         var pool = items.Where(t => t.Type == type).ToList();
-        return tier switch
-        {
-            0 => pool[0],
-            1 => Rng.NextDouble() < 0.7 ? pool[1] : pool[0],
-            2 => Rng.NextDouble() < 0.7 ? pool[2] : pool[1],
-            _ => pool[2],
-        };
+        return pool[Math.Min(tier, pool.Count - 1)];
     }
 
     private static ItemJson MakeItem(int id, ItemTemplate tpl, (int, int) cell)
@@ -631,8 +642,8 @@ public static class FloorGenerator
 
         floor.ItemsOnFloor.Add(new ItemJson
         {
-            Id = 11,
-            TemplateId = 13,
+            Id = floor.ItemsOnFloor.Max(i => i.Id) + 1,
+            TemplateId = 16,
             Name = "飞行器",
             Desc = "楼层穿梭机，在楼梯旁使用，跳转至已探索楼层，无使用次数",
             Type = "FlyOrb",

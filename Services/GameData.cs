@@ -15,6 +15,9 @@ public static class GameData
 
     public static List<Quest> Quests { get; } = new();
 
+    /// <summary>分层商店（ShopId 1~4 对应 1~24 / 25~50 / 51~80 / 81~100 层段位定价）</summary>
+    public static List<ShopConfig> Shops { get; } = new();
+
     public static ShopConfig Shop { get; } = new();
 
     private static readonly string DataDir =
@@ -31,8 +34,13 @@ public static class GameData
         MonsterTemplates = Load<List<Monster>>("Monsters.json") ?? new();
         ItemTemplates = Load<List<Item>>("Items.json") ?? new();
         Quests = Load<List<Quest>>("Quests.json") ?? new();
-        Shop = Load<ShopConfig>("ShopConfig.json") ?? new ShopConfig();
+        var shops = Load<List<ShopConfig>>("ShopConfig.json") ?? new();
+        foreach (var s in shops) Shops.Add(s);
     }
+
+    /// <summary>按事件携带的 ShopId 取对应段位商店；未知 ID 回退到第一档。</summary>
+    public static ShopConfig GetShop(int? shopId)
+        => Shops.FirstOrDefault(s => s.ShopId == (shopId ?? 1)) ?? Shops.FirstOrDefault() ?? Shop;
 
     private static T? Load<T>(string file) where T : class
     {

@@ -5,11 +5,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 /// <summary>玩家实体（可绑定，JSON 序列化）</summary>
 public partial class Player : ObservableObject
 {
+    // 初始生命按前几层怪物校准：最优顺序全清第 1 层损血 288（约占 58%），第 2 层起药水净收入转正
     [ObservableProperty]
-    private int _hp = 100;
+    private int _hp = 500;
 
     [ObservableProperty]
-    private int _maxHp = 100;
+    private int _maxHp = 500;
 
     [ObservableProperty]
     private int _attack = 10;
@@ -27,7 +28,7 @@ public partial class Player : ObservableObject
     private int _blueKey;
 
     [ObservableProperty]
-    private int _yellowKey = 2;
+    private int _yellowKey = 1;
 
     [ObservableProperty]
     private int _currentFloor = 1;

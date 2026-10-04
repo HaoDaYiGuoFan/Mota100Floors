@@ -1,7 +1,8 @@
 # 怪物系统实现规格（Monster System Spec · V1.0）
 
-> 与 `docs/GDD.md` 对应。本文档描述**代码级**实现：数据、数值、状态机、事件、UI 与音频，便于维护与扩展。
+> ⚠️ **V1.1 变更**：怪物模板重制为原版魔塔体系——`Data/Monsters.json` 现为 **60 个模板**（1~23 号 = 原版 24 层经典版怪物手册数值；24~50 号原版曲线外推；51~60 号里程碑 BOSS，每 10 层一座）。`SpriteIndex` 即模板 Id，对应 `Assets/Tiles/monster_{id}.png` 独立贴图；`Type = FixedDamage` 表示法师系（无视防御）；商店改为 4 档分层定价（`ShopConfig.json` 为数组）。战斗流程为触怪即战（见 `docs/GDD.md` 顶部 V1.1 变更）。
 
+> 与 `docs/GDD.md` 对应。本文档描述**代码级**实现：数据、数值、状态机、事件、UI 与音频，便于维护与扩展。
 ---
 
 ## 1. 数据层

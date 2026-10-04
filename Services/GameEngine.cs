@@ -143,7 +143,7 @@ public class GameEngine
         }
 
         IsShopOpen = false;
-        CurrentShop = GameData.Shop;
+        CurrentShop = GameData.GetShop(1);
         EnterFloor(floorNumber, EntryMode.Load);
     }
 
@@ -229,7 +229,7 @@ public class GameEngine
         switch (item.Type)
         {
             case ItemType.Hp:
-                Player.Hp = Math.Min(Player.MaxHp, Player.Hp + item.Value);
+                Heal(item.Value);
                 PushMessage($"购买{item.Name}，恢复 {item.Value} 生命。");
                 break;
             case ItemType.Attack:
@@ -328,7 +328,15 @@ public class GameEngine
             return true;
         }
 
-        // 打开战斗面板：预演战果、破防/必死提示由 UI 呈现；不移动，等玩家选择「战斗 / 撤退」。
+        // 原版魔塔规则：无法破防（攻击 ≤ 怪物防御）视作撞墙，不进入战斗。
+        if (!MathHelper.CanBreakDefense(monster, Player))
+        {
+            PushMessage($"无法破防 {monster.Name}：你的攻击 {Player.Attack} ≤ 怪物防御 {monster.Defense}，先提升攻击再来。");
+            StateChanged?.Invoke();
+            return false;
+        }
+
+        // 原版魔塔规则：触怪即战。创建战斗状态并立即开打（UI 逐回合推进动画）。
         _battleTile = (x, y);
         var sim = MathHelper.SimulateBattle(monster, Player);
         ActiveBattle = new ActiveBattleState
@@ -339,11 +347,12 @@ public class GameEngine
             PlayerDamagePerHit = MathHelper.PlayerDamagePerTurn(monster, Player),
             MonsterDamagePerHit = MathHelper.MonsterDamagePerTurn(monster, Player),
             Preview = sim,
-            CanBreakDefense = MathHelper.CanBreakDefense(monster, Player),
+            CanBreakDefense = true,
             IsBoss = MathHelper.IsBoss(monster),
             IsFixed = monster.Type == MonsterType.FixedDamage || monster.IgnoreDefense,
             IsDrain = monster.Type == MonsterType.DrainBlood,
         };
+        BattleStarted?.Invoke();
         StateChanged?.Invoke();
         return false;
     }
@@ -361,7 +370,7 @@ public class GameEngine
         switch (item.Type)
         {
             case ItemType.Hp:
-                Player.Hp = Math.Min(Player.MaxHp, Player.Hp + item.Value);
+                Heal(item.Value);
                 PushMessage($"拾取 {item.Name}，生命 +{item.Value}。");
                 break;
             case ItemType.Attack:
@@ -483,7 +492,7 @@ public class GameEngine
 
         if (ev.ShopId != null)
         {
-            CurrentShop = GameData.Shop;
+            CurrentShop = GameData.GetShop(ev.ShopId);
             IsShopOpen = true;
             PushMessage($"进入商店「{ev.Name}」。{ev.Text}");
         }
@@ -594,6 +603,16 @@ public class GameEngine
         PushMessage($"任务「{quest.Name}」完成！{quest.RewardText}。");
     }
 
+    /// <summary>
+    /// 恢复生命（原版魔塔规则：生命无上限，药水/购买可无限累计；
+    /// 上限随当前生命同步抬高，仅用于 HUD 显示 "当前 / 峰值"）。
+    /// </summary>
+    private void Heal(int amount)
+    {
+        Player.Hp += amount;
+        if (Player.Hp > Player.MaxHp) Player.MaxHp = Player.Hp;
+    }
+
     private int KeyCount(KeyType t) => t switch
     {
         KeyType.Red => Player.RedKey,
@@ -658,22 +677,6 @@ public class GameEngine
 
     // ---------- 逐回合战斗状态机 ----------
 
-    /// <summary>玩家点击「战斗」：破防失败禁止开战（不触发被动、不扣血），否则切入战斗。</summary>
-    public void ConfirmBattle()
-    {
-        var b = ActiveBattle;
-        if (b == null || b.Ended) return;
-
-        if (!b.CanBreakDefense)
-        {
-            PushMessage($"无法破防 {b.Monster.Name}：玩家攻击 {Player.Attack} ≤ 怪物防御 {b.Monster.Defense}，禁止开战。提升攻击后再来。");
-            CancelBattle();
-            return;
-        }
-
-        BattleStarted?.Invoke();
-    }
-
     /// <summary>推进一个回合（玩家攻击 → 怪物反击 → 吸血回复），返回本回合后战斗是否已结束。</summary>
     public bool StepBattle()
     {
@@ -726,19 +729,7 @@ public class GameEngine
         return b.Ended;
     }
 
-    /// <summary>玩家点击「撤退」：不扣血、无奖励，玩家留在原地。BOSS 战禁止撤退。</summary>
-    public void RetreatBattle()
-    {
-        var b = ActiveBattle;
-        if (b == null || b.Ended || b.IsBoss) return;
-
-        b.Retreated = true;
-        b.Ended = true;
-        PushMessage($"从 {b.Monster.Name} 面前撤退，未损失生命，未获得金币。");
-        FinishBattle();
-    }
-
-    /// <summary>取消战斗面板（不结算、不移动，仅用于破防失败等场景）</summary>
+    /// <summary>取消战斗面板（不结算、不移动；触怪即战流程下仅在异常兜底时使用）</summary>
     public void CancelBattle()
     {
         if (ActiveBattle == null) return;
@@ -846,9 +837,9 @@ public sealed class ActiveBattleState
     /// <summary>逐回合战报（最新在后）</summary>
     public List<BattleStep> Steps { get; } = new();
 
-    /// <summary>战斗面板开场白（BOSS 附加禁撤退警告）</summary>
+    /// <summary>战斗面板开场白（BOSS 附加提示）</summary>
     public string IntroText => IsBoss
-        ? $"{Monster.Name} 挡住了去路！这是 BOSS 战，禁止撤退，胜利将掉落红钥匙！"
+        ? $"{Monster.Name} 挡住了去路！这是 BOSS 战，胜利将掉落红钥匙！"
         : $"遭遇 {Monster.Name}！";
 }
 
