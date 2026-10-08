@@ -9,7 +9,7 @@
     <RootNamespace>Mota100Floors</RootNamespace>
     <AssemblyName>Mota100Floors</AssemblyName>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Description>魔塔 100 层 - .NET 10 WPF 单机回合制 RPG</Description>
     <!-- MotaMapGenerator 是嵌套的独立工具项目，需从主项目默认 glob（Compile/None/Resource 等）中整体排除，
          否则其 obj\Release 下生成的 AssemblyInfo.cs 等会被当作主项目源码编译，导致 CS0579 程序集特性重复 -->

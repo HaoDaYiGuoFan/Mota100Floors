@@ -206,8 +206,8 @@
       "Attack": 780,
       "Defense": 350,
       "GoldReward": 340,
-      "X": 3,
-      "Y": 2,
+      "X": 10,
+      "Y": 3,
       "IsAlive": true,
       "IsBoss": false,
       "Tier": 0
@@ -221,37 +221,13 @@
       "Defense": 260,
       "GoldReward": 500,
       "X": 3,
-      "Y": 1,
+      "Y": 2,
       "IsAlive": true,
       "IsBoss": true,
       "Tier": 3
     }
   ],
   "ItemsOnFloor": [
-    {
-      "Id": 1,
-      "TemplateId": 4,
-      "Name": "\u5723\u8840\u74F6",
-      "Desc": "\u6062\u590D 3000 \u70B9\u751F\u547D",
-      "Type": "Hp",
-      "KeyType": "Yellow",
-      "Value": 3000,
-      "X": 4,
-      "Y": 3,
-      "PickedUp": false
-    },
-    {
-      "Id": 2,
-      "TemplateId": 4,
-      "Name": "\u5723\u8840\u74F6",
-      "Desc": "\u6062\u590D 3000 \u70B9\u751F\u547D",
-      "Type": "Hp",
-      "KeyType": "Yellow",
-      "Value": 3000,
-      "X": 10,
-      "Y": 3,
-      "PickedUp": false
-    },
     {
       "Id": 3,
       "TemplateId": 4,
@@ -284,7 +260,7 @@
       "Type": "Defense",
       "KeyType": "Yellow",
       "Value": 6,
-      "X": 8,
+      "X": 4,
       "Y": 3,
       "PickedUp": false
     },

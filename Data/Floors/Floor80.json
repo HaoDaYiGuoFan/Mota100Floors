@@ -94,8 +94,8 @@
       "Attack": 450,
       "Defense": 220,
       "GoldReward": 400,
-      "X": 15,
-      "Y": 7,
+      "X": 14,
+      "Y": 8,
       "IsAlive": true,
       "IsBoss": true,
       "Tier": 3

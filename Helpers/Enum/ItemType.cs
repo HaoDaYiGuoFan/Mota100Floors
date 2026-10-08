@@ -15,6 +15,6 @@ public enum ItemType
     /// <summary>钥匙</summary>
     Key,
 
-    /// <summary>飞行器（永久持有道具，不消耗；拾取后进入背包，可在楼梯旁传送至已探索楼层）</summary>
+    /// <summary>飞行器（永久持有道具，不消耗；拾取后进入背包，任意位置可传送至已探索楼层）</summary>
     FlyOrb,
 }

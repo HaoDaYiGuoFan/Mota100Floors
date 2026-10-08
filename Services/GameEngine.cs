@@ -130,6 +130,9 @@ public class GameEngine
             : 1;
 
         Player = save.Player;
+        // 上限引入前的存档血量可能远超 MaxHpCap，读档时收敛（HUD 与规则即刻一致）
+        Player.MaxHp = Math.Min(Player.MaxHp, Player.MaxHpCap);
+        Player.Hp = Math.Min(Player.Hp, Player.MaxHp);
         Player.VisitedFloors ??= new(); // 旧版 v1 存档无该字段，兜底初始化
         _floorCache.Clear();
         Messages.Clear();
@@ -388,7 +391,7 @@ public class GameEngine
             case ItemType.FlyOrb:
                 // 飞行器：永久持有道具，拾取后从地图移除并进入背包（无消耗、不改属性）
                 Player.IsHasFlyOrb = true;
-                PushMessage("【捡到飞行器】这是一台古老的楼层穿梭飞行器，可以在塔内楼层之间快速穿梭。提示：只能前往你已经到达过的楼层，使用时需要站在楼梯旁边。");
+                PushMessage("【捡到飞行器】这是一台古老的楼层穿梭飞行器，可以在塔内楼层之间快速穿梭。提示：可在楼层任意位置启动，只能前往你已经到达过的楼层。");
                 break;
         }
 
@@ -430,9 +433,9 @@ public class GameEngine
     // ---------- 飞行器（楼层穿梭机） ----------
 
     /// <summary>
-    /// 使用飞行器前的校验（原版硬性规则）：
+    /// 使用飞行器前的校验：
     /// 1. 必须已持有飞行器；
-    /// 2. 玩家必须站在楼梯（上楼/下楼楼梯格子）上；
+    /// 2. 楼层任意位置均可启动（不要求站在楼梯格）；
     /// 3. 非商店/战斗状态。
     /// 通过返回 true；否则返回 false 并给出提示文案。
     /// </summary>
@@ -447,12 +450,6 @@ public class GameEngine
         if (IsShopOpen || IsBattleOpen)
         {
             reason = "当前状态无法使用飞行器。";
-            return false;
-        }
-        var tile = CurrentFloor.GetTile(Player.PosX, Player.PosY);
-        if (tile is not { TileType: TileType.StairUp or TileType.StairDown })
-        {
-            reason = "必须站在楼梯旁才能启动飞行器！";
             return false;
         }
         return true;
@@ -504,7 +501,7 @@ public class GameEngine
                 HandleQuestNpc(questId);
             // 1F 老祭司：持有飞行器后追加穿梭机台词（原版设定）
             if (Player.IsHasFlyOrb && CurrentFloor.FloorNumber == 1)
-                PushMessage($"{ev.Name}：这个飞行器是早年塔内建造者留下的穿梭装置，不能传送到未曾探索的区域，记得只能在楼梯位置启动。");
+                PushMessage($"{ev.Name}：这个飞行器是早年塔内建造者留下的穿梭装置，可以在楼层任意位置启动，但不能传送到未曾探索的区域。");
         }
         StateChanged?.Invoke();
         return true;
@@ -595,7 +592,7 @@ public class GameEngine
         Player.Defense += quest.RewardDefense;
         if (quest.RewardMaxHp > 0)
         {
-            Player.MaxHp += quest.RewardMaxHp;
+            Player.MaxHp = Math.Min(Player.MaxHp + quest.RewardMaxHp, Player.MaxHpCap);
             Player.Hp = Math.Min(Player.MaxHp, Player.Hp + quest.RewardMaxHp);
         }
 
@@ -604,13 +601,14 @@ public class GameEngine
     }
 
     /// <summary>
-    /// 恢复生命（原版魔塔规则：生命无上限，药水/购买可无限累计；
-    /// 上限随当前生命同步抬高，仅用于 HUD 显示 "当前 / 峰值"）。
+    /// 恢复生命：上限随当前生命同步抬高（HUD 显示 "当前 / 峰值"），
+    /// 但峰值封顶于 MaxHpCap——超出部分浪费，不再无限累计。
     /// </summary>
     private void Heal(int amount)
     {
         Player.Hp += amount;
-        if (Player.Hp > Player.MaxHp) Player.MaxHp = Player.Hp;
+        Player.MaxHp = Math.Min(Math.Max(Player.MaxHp, Player.Hp), Player.MaxHpCap);
+        Player.Hp = Math.Min(Player.Hp, Player.MaxHp);
     }
 
     private int KeyCount(KeyType t) => t switch
@@ -771,7 +769,14 @@ public class GameEngine
             }
 
             monster.IsAlive = false;
-            tile.TileType = TileType.Floor;
+            // 恢复该格原始地形而非一律地板：历史数据中怪物可能站在楼梯格上，
+            // 直接置为 Floor 会永久摧毁楼梯（如 80F BOSS 曾压在上楼楼梯上）
+            tile.TileType = CurrentFloor.GridRows[_battleTile.Y][_battleTile.X] switch
+            {
+                'U' => TileType.StairUp,
+                'D' => TileType.StairDown,
+                _ => TileType.Floor,
+            };
             PushMessage($"击败 {monster.Name}！耗时 {b.Turn} 回合，损失 {actualLoss} 生命，获得 {monster.GoldReward} 金币。");
 
             if (b.IsBoss && CurrentFloor.FloorNumber == MapConstants.TotalFloors)

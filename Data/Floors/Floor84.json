@@ -250,7 +250,7 @@
       "Type": "Hp",
       "KeyType": "Yellow",
       "Value": 3000,
-      "X": 11,
+      "X": 12,
       "Y": 7,
       "PickedUp": false
     },
@@ -286,7 +286,7 @@
       "Type": "Attack",
       "KeyType": "Yellow",
       "Value": 16,
-      "X": 9,
+      "X": 6,
       "Y": 7,
       "PickedUp": false
     },
@@ -346,8 +346,8 @@
       "Type": "Key",
       "KeyType": "Yellow",
       "Value": 1,
-      "X": 10,
-      "Y": 7,
+      "X": 4,
+      "Y": 4,
       "PickedUp": false
     },
     {

@@ -278,7 +278,7 @@
       "Type": "Hp",
       "KeyType": "Yellow",
       "Value": 1000,
-      "X": 13,
+      "X": 12,
       "Y": 6,
       "PickedUp": false
     },
@@ -387,7 +387,7 @@
       "KeyType": "Blue",
       "Value": 1,
       "X": 13,
-      "Y": 3,
+      "Y": 4,
       "PickedUp": false
     }
   ],

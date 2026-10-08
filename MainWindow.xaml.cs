@@ -130,7 +130,7 @@ public partial class MainWindow : Window
         if (item.Type == ItemType.FlyOrb)
         {
             _audio.PlayFlyOrbPickup();
-            MessageBox.Show("【捡到飞行器】这是一台古老的楼层穿梭飞行器，可在塔内楼层之间穿梭。\n提示：只能前往已经到达过的楼层，且使用时需要站在楼梯旁边。",
+            MessageBox.Show("【捡到飞行器】这是一台古老的楼层穿梭飞行器，可在塔内楼层之间穿梭。\n提示：可在楼层任意位置启动，只能前往已经到达过的楼层。",
                 "魔塔 100 层", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         else
@@ -521,7 +521,7 @@ public partial class MainWindow : Window
         InventoryEmptyText.Visibility = has ? Visibility.Collapsed : Visibility.Visible;
     }
 
-    /// <summary>背包内点击「使用」：必须持有飞行器、站在楼梯格、不在商店/战斗中，否则提示失败原因。</summary>
+    /// <summary>背包内点击「使用」：必须持有飞行器且不在商店/战斗中，否则提示失败原因。</summary>
     private void OnFlyOrbUseClick(object sender, RoutedEventArgs e)
     {
         if (!_engine.TryUseFlyOrb(out string reason))

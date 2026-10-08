@@ -19,7 +19,7 @@
     {
       "Id": 1,
       "TemplateId": 3,
-      "Name": "\u5c0f\u8759\u8760",
+      "Name": "\u5C0F\u8759\u8760",
       "Hp": 50,
       "Attack": 24,
       "Defense": 8,
@@ -33,7 +33,7 @@
     {
       "Id": 2,
       "TemplateId": 1,
-      "Name": "\u7eff\u8272\u53f2\u83b1\u59c6",
+      "Name": "\u7EFF\u8272\u53F2\u83B1\u59C6",
       "Hp": 35,
       "Attack": 24,
       "Defense": 5,
@@ -47,7 +47,7 @@
     {
       "Id": 3,
       "TemplateId": 3,
-      "Name": "\u5c0f\u8759\u8760",
+      "Name": "\u5C0F\u8759\u8760",
       "Hp": 50,
       "Attack": 24,
       "Defense": 8,
@@ -61,7 +61,7 @@
     {
       "Id": 4,
       "TemplateId": 1,
-      "Name": "\u7eff\u8272\u53f2\u83b1\u59c6",
+      "Name": "\u7EFF\u8272\u53F2\u83B1\u59C6",
       "Hp": 35,
       "Attack": 24,
       "Defense": 5,
@@ -75,7 +75,7 @@
     {
       "Id": 5,
       "TemplateId": 4,
-      "Name": "\u9ed1\u8272\u53f2\u83b1\u59c6",
+      "Name": "\u9ED1\u8272\u53F2\u83B1\u59C6",
       "Hp": 60,
       "Attack": 30,
       "Defense": 8,
@@ -89,7 +89,7 @@
     {
       "Id": 6,
       "TemplateId": 2,
-      "Name": "\u7ea2\u8272\u53f2\u83b1\u59c6",
+      "Name": "\u7EA2\u8272\u53F2\u83B1\u59C6",
       "Hp": 45,
       "Attack": 26,
       "Defense": 6,
@@ -103,7 +103,7 @@
     {
       "Id": 7,
       "TemplateId": 3,
-      "Name": "\u5c0f\u8759\u8760",
+      "Name": "\u5C0F\u8759\u8760",
       "Hp": 50,
       "Attack": 24,
       "Defense": 8,
@@ -117,7 +117,7 @@
     {
       "Id": 8,
       "TemplateId": 1,
-      "Name": "\u7eff\u8272\u53f2\u83b1\u59c6",
+      "Name": "\u7EFF\u8272\u53F2\u83B1\u59C6",
       "Hp": 35,
       "Attack": 24,
       "Defense": 5,
@@ -131,7 +131,7 @@
     {
       "Id": 9,
       "TemplateId": 3,
-      "Name": "\u5c0f\u8759\u8760",
+      "Name": "\u5C0F\u8759\u8760",
       "Hp": 50,
       "Attack": 24,
       "Defense": 8,
@@ -145,7 +145,7 @@
     {
       "Id": 10,
       "TemplateId": 2,
-      "Name": "\u7ea2\u8272\u53f2\u83b1\u59c6",
+      "Name": "\u7EA2\u8272\u53F2\u83B1\u59C6",
       "Hp": 45,
       "Attack": 26,
       "Defense": 6,
@@ -159,7 +159,7 @@
     {
       "Id": 11,
       "TemplateId": 3,
-      "Name": "\u5c0f\u8759\u8760",
+      "Name": "\u5C0F\u8759\u8760",
       "Hp": 50,
       "Attack": 24,
       "Defense": 8,
@@ -173,7 +173,7 @@
     {
       "Id": 12,
       "TemplateId": 1,
-      "Name": "\u7eff\u8272\u53f2\u83b1\u59c6",
+      "Name": "\u7EFF\u8272\u53F2\u83B1\u59C6",
       "Hp": 35,
       "Attack": 24,
       "Defense": 5,
@@ -187,7 +187,7 @@
     {
       "Id": 13,
       "TemplateId": 4,
-      "Name": "\u9ed1\u8272\u53f2\u83b1\u59c6",
+      "Name": "\u9ED1\u8272\u53F2\u83B1\u59C6",
       "Hp": 60,
       "Attack": 30,
       "Defense": 8,
@@ -203,8 +203,8 @@
     {
       "Id": 1,
       "TemplateId": 1,
-      "Name": "\u7ea2\u836f\u6c34",
-      "Desc": "\u6062\u590d 100 \u70b9\u751f\u547d",
+      "Name": "\u7EA2\u836F\u6C34",
+      "Desc": "\u6062\u590D 100 \u70B9\u751F\u547D",
       "Type": "Hp",
       "KeyType": "Yellow",
       "Value": 100,
@@ -215,8 +215,8 @@
     {
       "Id": 2,
       "TemplateId": 1,
-      "Name": "\u7ea2\u836f\u6c34",
-      "Desc": "\u6062\u590d 100 \u70b9\u751f\u547d",
+      "Name": "\u7EA2\u836F\u6C34",
+      "Desc": "\u6062\u590D 100 \u70B9\u751F\u547D",
       "Type": "Hp",
       "KeyType": "Yellow",
       "Value": 100,
@@ -227,20 +227,20 @@
     {
       "Id": 4,
       "TemplateId": 5,
-      "Name": "\u7ea2\u5b9d\u77f3",
-      "Desc": "\u653b\u51fb +2",
+      "Name": "\u7EA2\u5B9D\u77F3",
+      "Desc": "\u653B\u51FB \u002B2",
       "Type": "Attack",
       "KeyType": "Yellow",
       "Value": 2,
-      "X": 9,
+      "X": 10,
       "Y": 7,
       "PickedUp": false
     },
     {
       "Id": 6,
       "TemplateId": 9,
-      "Name": "\u84dd\u5b9d\u77f3",
-      "Desc": "\u9632\u5fa1 +2",
+      "Name": "\u84DD\u5B9D\u77F3",
+      "Desc": "\u9632\u5FA1 \u002B2",
       "Type": "Defense",
       "KeyType": "Yellow",
       "Value": 2,
@@ -251,8 +251,8 @@
     {
       "Id": 7,
       "TemplateId": 13,
-      "Name": "\u9ec4\u94a5\u5319",
-      "Desc": "\u53ef\u6253\u5f00\u9ec4\u8272\u95e8",
+      "Name": "\u9EC4\u94A5\u5319",
+      "Desc": "\u53EF\u6253\u5F00\u9EC4\u8272\u95E8",
       "Type": "Key",
       "KeyType": "Yellow",
       "Value": 1,
@@ -263,8 +263,8 @@
     {
       "Id": 8,
       "TemplateId": 13,
-      "Name": "\u9ec4\u94a5\u5319",
-      "Desc": "\u53ef\u6253\u5f00\u9ec4\u8272\u95e8",
+      "Name": "\u9EC4\u94A5\u5319",
+      "Desc": "\u53EF\u6253\u5F00\u9EC4\u8272\u95E8",
       "Type": "Key",
       "KeyType": "Yellow",
       "Value": 1,

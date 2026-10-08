@@ -286,7 +286,7 @@
       "Type": "Attack",
       "KeyType": "Yellow",
       "Value": 16,
-      "X": 11,
+      "X": 12,
       "Y": 7,
       "PickedUp": false
     },
@@ -371,7 +371,7 @@
       "KeyType": "Blue",
       "Value": 1,
       "X": 6,
-      "Y": 7,
+      "Y": 2,
       "PickedUp": false
     },
     {

@@ -14,6 +14,9 @@ public static class BalanceSimulator
 {
     private const int StartHp = 500, StartAtk = 10, StartDef = 10; // 与 Player.cs 初始值一致（按前几层怪物战损校准）
 
+    /// <summary>生命硬上限，与游戏 Player.MaxHpCap 保持一致（MotaMapGenerator 不引用主项目，此处取同值）</summary>
+    private const int MaxHpCap = 100_000;
+
     public static int Run(string floorsDir, List<MonsterTemplate> templates, List<ShopConfigJson> shops)
     {
         var tplById = templates.ToDictionary(t => t.Id);
@@ -34,12 +37,12 @@ public static class BalanceSimulator
 
             int hpBefore = hp, atkBefore = atk;
 
-            // 1. 拾取全层道具：药水直接入账（原版无生命上限），宝石加属性，钥匙入袋
+            // 1. 拾取全层道具：药水入账（受生命上限约束，溢出浪费），宝石加属性，钥匙入袋
             foreach (var it in floor.ItemsOnFloor)
             {
                 switch (it.Type)
                 {
-                    case "Hp": hp += it.Value; break;
+                    case "Hp": hp = Math.Min(hp + it.Value, MaxHpCap); break;
                     case "Attack": atk += it.Value; break;
                     case "Defense": def += it.Value; break;
                     case "Key" when it.KeyType == "Yellow": yellow++; break;
@@ -69,7 +72,7 @@ public static class BalanceSimulator
                     else break;
                     atkTurn = !atkTurn;
                 }
-                while (gold >= hpPrice) { gold -= hpPrice; hp += shop.Items.First(i => i.Type == "Hp").Value; }
+                while (gold >= hpPrice && hp < MaxHpCap) { gold -= hpPrice; hp += shop.Items.First(i => i.Type == "Hp").Value; }
             }
 
             // 3. 满清全层怪物（含 BOSS），公式与 MathHelper 一致

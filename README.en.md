@@ -59,8 +59,8 @@ This game was **entirely developed by the DeepSeek V4 Flash AI** — from game d
 - **Audio & music**: 8 SFX classes (pickup, fly-orb pickup/launch/arrive, step, door, battle hit, victory, death) plus upbeat explore/battle BGM (C major 112 BPM / A major 150 BPM, seamless 8-bit loops); `M` mutes; everything is synthesized by `generate_audio.ps1`.
 - **Save system**: `F5` save / `F9` load (`%LOCALAPPDATA%\Mota100Floors\save.json`, temp file + atomic overwrite).
 - **Classic Mota systems**: tiered shops (4 price bands by floor), 5 NPC quests, 6 stat gates, milestone bosses dropping red keys, and the floor-100 win check against the Nether Overlord.
-- **Fly Orb (floor shuttle)**: a permanent item at the F1 bottom-left; `I` opens inventory, use it on a stair tile to warp to any visited floor (unvisited floors are greyed out).
-- **Original economy**: starting HP 500 / ATK 10 / DEF 10 / yellow key ×1 (start HP calibrated so an optimal full clear of floor 1 costs ≈58% of it), red/blue gems start at +2, red potion +100, HP uncapped; the generator ships with a **playthrough balance simulator** that validates all 100 floors.
+- **Fly Orb (floor shuttle)**: a permanent item at the F1 bottom-left; `I` opens inventory, use it from anywhere on a floor to warp to any visited floor (unvisited floors are greyed out; you land on the target floor's stairs).
+- **Original economy**: starting HP 500 / ATK 10 / DEF 10 / yellow key ×1 (start HP calibrated so an optimal full clear of floor 1 costs ≈58% of it), red/blue gems start at +2, red potion +100; HP is capped at 100,000 (calibrated with the playthrough simulator: a full-clear reference player's worst per-floor loss is about 5.5k, so the cap leaves a multiple of headroom; overheal above the cap is wasted); the generator ships with a **playthrough balance simulator** that validates all 100 floors.
 
 ---
 

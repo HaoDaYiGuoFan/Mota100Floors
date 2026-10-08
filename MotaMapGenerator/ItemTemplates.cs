@@ -29,7 +29,7 @@ public static class ItemTemplates
         new() { Id = 14, Name = "蓝钥匙", Desc = "可打开蓝色门", Type = "Key", KeyType = "Blue", Value = 1 },
         new() { Id = 15, Name = "红钥匙", Desc = "可打开红色门", Type = "Key", KeyType = "Red", Value = 1 },
         // 飞行器（楼层穿梭机）：永久持有道具，1F 左下角拾取，不消耗
-        new() { Id = 16, Name = "飞行器", Desc = "楼层穿梭机，在楼梯旁使用，跳转至已探索楼层，无使用次数", Type = "FlyOrb", KeyType = "Yellow", Value = 0 },
+        new() { Id = 16, Name = "飞行器", Desc = "楼层穿梭机，任意位置使用，跳转至已探索楼层，无使用次数", Type = "FlyOrb", KeyType = "Yellow", Value = 0 },
     };
 
     /// <summary>

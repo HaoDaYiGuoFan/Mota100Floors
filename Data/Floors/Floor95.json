@@ -400,7 +400,7 @@
       "Type": "Key",
       "KeyType": "Yellow",
       "Value": 1,
-      "X": 11,
+      "X": 6,
       "Y": 7,
       "PickedUp": false
     },
@@ -436,7 +436,7 @@
       "Type": "Key",
       "KeyType": "Blue",
       "Value": 1,
-      "X": 11,
+      "X": 6,
       "Y": 4,
       "PickedUp": false
     },

@@ -313,7 +313,7 @@
                                                FontSize="17"
                                                FontWeight="Bold"
                                                Foreground="#FFFFF3D6" />
-                                    <TextBlock Text="永久持有 · 无使用次数 · 在楼梯旁使用"
+                                    <TextBlock Text="永久持有 · 无使用次数 · 任意位置使用"
                                                FontSize="13"
                                                Foreground="#FFCFB98C"
                                                Margin="0,3,0,0" />
@@ -326,7 +326,7 @@
                                         FontSize="15" />
                             </Grid>
                         </Border>
-                        <TextBlock Text="使用飞行器需要站在楼梯（上楼 / 下楼楼梯）格子上，且只能传送到已经探索过的楼层。"
+                        <TextBlock Text="飞行器可在楼层任意位置启动，且只能传送到已经探索过的楼层（落地于目标层楼梯处）。"
                                    FontSize="13"
                                    Foreground="#FF9A9A9A"
                                    TextWrapping="Wrap"
@@ -349,7 +349,7 @@
         </Grid>
 
 
-        <!-- ======== 楼层穿梭飞行器面板（打开条件：持有飞行器 + 站在楼梯格） ======== -->
+        <!-- ======== 楼层穿梭飞行器面板（打开条件：持有飞行器，任意位置可用） ======== -->
         <Grid x:Name="FlyOrbOverlay"
               Grid.Row="1"
               Visibility="Collapsed"

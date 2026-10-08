@@ -237,7 +237,7 @@
       "KeyType": "Yellow",
       "Value": 3000,
       "X": 5,
-      "Y": 5,
+      "Y": 4,
       "PickedUp": false
     },
     {
@@ -368,7 +368,7 @@
       "Type": "Key",
       "KeyType": "Red",
       "Value": 1,
-      "X": 6,
+      "X": 7,
       "Y": 1,
       "PickedUp": false
     }

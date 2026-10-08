@@ -3,7 +3,7 @@
 #   · 玩家四方向火柴人       player_up / player_down / player_left / player_right.png
 #   · 6 种经典怪物           monster_classic_1..6.png
 #   · 三色门 / 三色钥匙      door_yellow/red/blue.png、key_yellow/red/blue.png
-#                           （红、蓝版本由黄色原图按色度着色生成）
+#                           （三个颜色版本均由青绿色原图按色度着色生成，门色与钥匙一致）
 #   · 商店 / 楼梯 / 血瓶 / NPC / 胜利星
 # 原版素材普遍带 (230,230,230) 灰底，脚本会把该底色转换为透明，便于与现地图瓦片混排。
 # 用法：
@@ -26,24 +26,27 @@ function Is-GreyBackdrop([int]$r, [int]$g, [int]$b, [int]$tolerance = 16) {
 }
 
 # 彩色像素着色：把原图的彩色区（饱和度超过阈值）按亮度映射为目标色，灰/白/黑保留
-function Colorize-Rgb([int]$r, [int]$g, [int]$b, [int]$tr, [int]$tg, [int]$tb) {
+function Colorize-Rgb([int]$r, [int]$g, [int]$b, [int]$tr, [int]$tg, [int]$tb, [double]$lumBoost = 1.0) {
     $max = [math]::Max($r, [math]::Max($g, $b))
     $min = [math]::Min($r, [math]::Min($g, $b))
     $sat = if ($max -gt 0) { ($max - $min) / $max } else { 0 }
     if ($sat -lt 0.16) { return @($r, $g, $b) }
     $lum = (0.30 * $r + 0.59 * $g + 0.11 * $b) / 255.0
+    $lum = [math]::Min(1.0, $lum * $lumBoost)
     return @(
         [int][math]::Round($tr * $lum),
         [int][math]::Round($tg * $lum),
         [int][math]::Round($tb * $lum))
 }
 
-# 处理单张素材：可选透明化 + 可选着色，另存为 PNG
+# 处理单张素材：可选透明化 + 可选着色，另存为 PNG。
+# -lumBoost：着色前先提升彩色像素亮度（暗色原图着亮色时用，如青绿门→黄门）
 function Import-Sprite(
     [string]$src,
     [string]$name,
     [switch]$clr,
-    [int]$tr = 0, [int]$tg = 0, [int]$tb = 0) {
+    [int]$tr = 0, [int]$tg = 0, [int]$tb = 0,
+    [double]$lumBoost = 1.0) {
 
     $img = [System.Drawing.Bitmap]::new((Join-Path $SourceDir $src))
     $bmp = [System.Drawing.Bitmap]::new(
@@ -56,7 +59,7 @@ function Import-Sprite(
             if (Is-GreyBackdrop $c.R $c.G $c.B) { $a = 0 }
             $r = $c.R; $g = $c.G; $b = $c.B
             if ($clr) {
-                $rgb = Colorize-Rgb $r $g $b $tr $tg $tb
+                $rgb = Colorize-Rgb $r $g $b $tr $tg $tb $lumBoost
                 $r = $rgb[0]; $g = $rgb[1]; $b = $rgb[2]
             }
             $bmp.SetPixel($x, $y, [System.Drawing.Color]::FromArgb($a, $r, $g, $b))
@@ -82,8 +85,8 @@ Import-Sprite 'monster4.jpg' 'monster_classic_4.png'
 Import-Sprite 'monster5.jpg' 'monster_classic_5.png'
 Import-Sprite 'monster6.jpg' 'monster_classic_6.png'
 
-# ---------- 三色门 / 三色钥匙（红、蓝为着色版本） ----------
-Import-Sprite 'door.jpg' 'door_yellow.png'
+# ---------- 三色门 / 三色钥匙（红、蓝、黄均为着色版本，与钥匙颜色一致） ----------
+Import-Sprite 'door.jpg' 'door_yellow.png' -clr -tr 232 -tg 172 -tb 34 -lumBoost 1.9
 Import-Sprite 'door.jpg' 'door_red.png' -clr -tr 206 -tg 46 -tb 58
 Import-Sprite 'door.jpg' 'door_blue.png' -clr -tr 58 -tg 112 -tb 232
 Import-Sprite 'key.jpg' 'key_yellow.png'

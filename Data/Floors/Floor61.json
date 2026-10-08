@@ -326,7 +326,7 @@
       "Id": 1,
       "Type": "TalkNPC",
       "X": 10,
-      "Y": 3,
+      "Y": 4,
       "Name": "\u9884\u8A00\u8005",
       "Text": "\u697C\u5C42\u7684\u5B9D\u85CF\u5F80\u5F80\u85CF\u5728\u58C1\u9F9B\u7684\u6B7B\u89D2\u91CC\uFF0C\u4ED4\u7EC6\u63A2\u7D22\u6BCF\u4E00\u5C42\u3002",
       "ShopId": null

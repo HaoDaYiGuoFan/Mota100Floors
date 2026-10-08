@@ -533,7 +533,8 @@ public static class FloorGenerator
             foreach (var n in Neighbors(c))
             {
                 if (OutOfBounds(n) || seen.Contains(n)) continue;
-                if (g[n.Item1, n.Item2] == 'W') continue;
+                // 只在普通地板上扩散：落点不得是墙 / 楼梯 / 门（楼梯上放实体会被战斗结算摧毁）
+                if (g[n.Item1, n.Item2] != '.') continue;
                 seen.Add(n);
                 queue.Enqueue((n, d + 1));
             }
@@ -545,7 +546,7 @@ public static class FloorGenerator
     {
         for (int y = 0; y < H; y++)
             for (int x = 0; x < W; x++)
-                if (g[x, y] != 'W')
+                if (g[x, y] == '.')
                     yield return (x, y);
     }
 
@@ -645,7 +646,7 @@ public static class FloorGenerator
             Id = floor.ItemsOnFloor.Max(i => i.Id) + 1,
             TemplateId = 16,
             Name = "飞行器",
-            Desc = "楼层穿梭机，在楼梯旁使用，跳转至已探索楼层，无使用次数",
+            Desc = "楼层穿梭机，任意位置使用，跳转至已探索楼层，无使用次数",
             Type = "FlyOrb",
             KeyType = "Yellow",
             Value = 0,
